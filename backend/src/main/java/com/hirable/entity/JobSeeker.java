@@ -36,25 +36,32 @@ public class JobSeeker {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "job_seeker_skills", joinColumns = @JoinColumn(name = "job_seeker_id"))
     @Column(name = "skill")
+    @Builder.Default
     private List<String> skills = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "job_seeker_id")
+    @Builder.Default
     private List<Experience> experiences = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "job_seeker_id")
+    @Builder.Default
     private List<Education> educations = new ArrayList<>();
 
     private String resumeFilePath;
     private LocalDateTime resumeUploadedAt;
+    @Builder.Default
     private double relevanceScore = 0.0;
 
+    @Builder.Default
     private boolean flagged = false;
     private String flagReason;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
     private LocalDateTime updatedAt = LocalDateTime.now();
 }

@@ -28,13 +28,17 @@ public class Application {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private ApplicationStatus status = ApplicationStatus.APPLIED;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime appliedAt = LocalDateTime.now();
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
     private LocalDateTime updatedAt = LocalDateTime.now();
 }

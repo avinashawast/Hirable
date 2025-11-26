@@ -29,5 +29,6 @@ public class Shortlist {
     private JobSeeker jobSeeker;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime addedAt = LocalDateTime.now();
 }

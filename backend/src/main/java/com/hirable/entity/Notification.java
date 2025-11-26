@@ -32,8 +32,10 @@ public class Notification {
     private String message;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean read = false;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 }

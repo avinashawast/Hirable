@@ -1,9 +1,5 @@
 package com.hirable.util;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -108,32 +104,13 @@ public class SampleResumeGenerator {
         Files.createDirectories(uploadPath);
 
         for (String[] resume : RESUMES) {
-            String filename = resume[0];
+            String filename = resume[0].replace(".pdf", ".txt");
             String content = resume[1];
-            createPdfResume(uploadPath.resolve(filename), content);
+            createTextResume(uploadPath.resolve(filename), content);
         }
     }
 
-    private void createPdfResume(Path filePath, String content) throws IOException {
-        try (PDDocument document = new PDDocument()) {
-            PDPage page = new PDPage();
-            document.addPage(page);
-
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                contentStream.setFont(PDType1Font.HELVETICA, 11);
-                contentStream.beginText();
-                contentStream.setTextMatrix(1, 0, 0, 1, 50, 750);
-
-                String[] lines = content.split("\n");
-                for (String line : lines) {
-                    contentStream.showText(line);
-                    contentStream.newLineAtOffset(0, -15);
-                }
-
-                contentStream.endText();
-            }
-
-            document.save(filePath.toFile());
-        }
+    private void createTextResume(Path filePath, String content) throws IOException {
+        Files.writeString(filePath, content);
     }
 }

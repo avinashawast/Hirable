@@ -33,6 +33,7 @@ public class Job {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "job_required_skills", joinColumns = @JoinColumn(name = "job_id"))
     @Column(name = "skill")
+    @Builder.Default
     private List<String> requiredSkills = new ArrayList<>();
 
     private String location;
@@ -41,16 +42,20 @@ public class Job {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private JobStatus status = JobStatus.PENDING;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime postedAt = LocalDateTime.now();
 
     private LocalDateTime approvedAt;
     private String rejectionReason;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
     private LocalDateTime updatedAt = LocalDateTime.now();
 }

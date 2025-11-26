@@ -9,3 +9,4 @@ target/
 .DS_Store
 *.log
 uploads/
+test-uploads/

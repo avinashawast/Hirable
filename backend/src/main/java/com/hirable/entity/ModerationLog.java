@@ -38,6 +38,7 @@ public class ModerationLog {
     private String reason;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public enum ModerationAction {

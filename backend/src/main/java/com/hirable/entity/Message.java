@@ -33,7 +33,9 @@ public class Message {
     private String content;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime sentAt = LocalDateTime.now();
 
+    @Builder.Default
     private boolean read = false;
 }

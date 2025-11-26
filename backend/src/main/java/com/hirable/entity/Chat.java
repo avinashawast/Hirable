@@ -27,8 +27,10 @@ public class Chat {
     private JobSeeker jobSeeker;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
     private boolean flagged = false;
     private String flagReason;
 }
