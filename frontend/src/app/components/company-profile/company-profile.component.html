@@ -1,0 +1,48 @@
+<div class="company-profile-container">
+  <h2>Company Profile</h2>
+
+  <div *ngIf="loading" class="loading">Loading...</div>
+
+  <form *ngIf="!loading" (ngSubmit)="saveProfile()">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput [(ngModel)]="profile.firstName" name="firstName" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput [(ngModel)]="profile.lastName" name="lastName" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput [(ngModel)]="profile.phone" name="phone" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Company Name</mat-label>
+      <input matInput [(ngModel)]="profile.companyName" name="companyName" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Company Website</mat-label>
+      <input matInput [(ngModel)]="profile.companyWebsite" name="companyWebsite">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Company Description</mat-label>
+      <textarea matInput [(ngModel)]="profile.companyDescription" name="companyDescription" rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Industry</mat-label>
+      <mat-select [(ngModel)]="profile.industry" name="industry" required>
+        <mat-option *ngFor="let industry of industries" [value]="industry.name">
+          {{ industry.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save Profile</button>
+  </form>
+</div>

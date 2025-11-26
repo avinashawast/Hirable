@@ -1,0 +1,47 @@
+<div class="chat-container">
+  <div class="chat-list">
+    <h2>Chats</h2>
+    <div *ngIf="loading" class="loading">Loading chats...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="chats.length === 0 && !loading" class="no-chats">No chats yet</div>
+    <div class="chats">
+      <div *ngFor="let chat of chats" 
+           class="chat-item" 
+           [class.active]="selectedChat?.id === chat.id"
+           (click)="selectChat(chat)">
+        <div class="chat-name">
+          {{ chat.recruiterId === currentUserId ? chat.jobSeekerName : chat.recruiterName }}
+        </div>
+        <div class="chat-date">{{ chat.createdAt | date: 'short' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-window">
+    <div *ngIf="!selectedChat" class="no-chat-selected">
+      <p>Select a chat to start messaging</p>
+    </div>
+    <div *ngIf="selectedChat" class="chat-content">
+      <div class="chat-header">
+        <h3>{{ getOtherPartyName() }}</h3>
+      </div>
+      <div class="messages">
+        <div *ngFor="let message of messages" 
+             class="message" 
+             [class.sent]="message.senderId === currentUserId"
+             [class.received]="message.senderId !== currentUserId">
+          <div class="message-sender">{{ message.senderName }}</div>
+          <div class="message-content">{{ message.content }}</div>
+          <div class="message-time">{{ message.sentAt | date: 'short' }}</div>
+        </div>
+      </div>
+      <div class="message-input">
+        <textarea 
+          [(ngModel)]="messageContent" 
+          placeholder="Type a message..."
+          (keyup.enter)="sendMessage()"></textarea>
+        <button (click)="sendMessage()" [disabled]="!messageContent.trim()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

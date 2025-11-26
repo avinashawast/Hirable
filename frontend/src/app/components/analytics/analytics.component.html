@@ -1,0 +1,191 @@
+<div class="analytics-container">
+  <div class="analytics-header">
+    <h1>Platform Analytics</h1>
+    <button mat-raised-button color="primary" (click)="refreshAnalytics()">
+      Refresh
+    </button>
+  </div>
+
+  <mat-progress-spinner *ngIf="loading" diameter="50" class="loading-spinner"></mat-progress-spinner>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="analytics && !loading" class="analytics-content">
+    <!-- User Statistics -->
+    <div class="section">
+      <h2>User Statistics</h2>
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalJobSeekers }}</div>
+            <div class="metric-label">Total Job Seekers</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalRecruiters }}</div>
+            <div class="metric-label">Total Recruiters</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalAdmins }}</div>
+            <div class="metric-label">Total Admins</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Job Statistics -->
+    <div class="section">
+      <h2>Job Statistics</h2>
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalJobs }}</div>
+            <div class="metric-label">Total Jobs</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.approvedJobs }}</div>
+            <div class="metric-label">Approved Jobs</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.pendingJobs }}</div>
+            <div class="metric-label">Pending Jobs</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.rejectedJobs }}</div>
+            <div class="metric-label">Rejected Jobs</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Application Statistics -->
+    <div class="section">
+      <h2>Application Statistics</h2>
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalApplications }}</div>
+            <div class="metric-label">Total Applications</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Recruiter Activity -->
+    <div class="section">
+      <h2>Recruiter Activity</h2>
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.recruiterActivity.totalJobsPosted }}</div>
+            <div class="metric-label">Jobs Posted</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.recruiterActivity.jobsApproved }}</div>
+            <div class="metric-label">Jobs Approved</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.recruiterActivity.jobsRejected }}</div>
+            <div class="metric-label">Jobs Rejected</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.recruiterActivity.candidatesContacted }}</div>
+            <div class="metric-label">Candidates Contacted</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Job Seeker Activity -->
+    <div class="section">
+      <h2>Job Seeker Activity</h2>
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.jobSeekerActivity.totalApplicationsSubmitted }}</div>
+            <div class="metric-label">Applications Submitted</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.jobSeekerActivity.profilesWithResumes }}</div>
+            <div class="metric-label">Profiles with Resumes</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.jobSeekerActivity.averageApplicationsPerSeeker }}</div>
+            <div class="metric-label">Avg Applications per Seeker</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Chat Activity -->
+    <div class="section">
+      <h2>Chat Activity</h2>
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalChats }}</div>
+            <div class="metric-label">Total Chats</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalMessages }}</div>
+            <div class="metric-label">Total Messages</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.chatActivity.averageMessagesPerChat }}</div>
+            <div class="metric-label">Avg Messages per Chat</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Notification Statistics -->
+    <div class="section">
+      <h2>Notification Statistics</h2>
+      <div class="metrics-grid">
+        <mat-card class="metric-card">
+          <mat-card-content>
+            <div class="metric-value">{{ analytics.totalNotifications }}</div>
+            <div class="metric-label">Total Notifications</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

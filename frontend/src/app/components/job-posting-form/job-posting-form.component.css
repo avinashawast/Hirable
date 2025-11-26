@@ -1,0 +1,47 @@
+.job-posting-form-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.skills-section {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.skills-section mat-form-field {
+  flex: 1;
+}
+
+.skills-section button {
+  height: 56px;
+}
+
+.skills-list {
+  margin: 10px 0;
+}
+
+mat-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button[type="submit"] {
+  margin-top: 10px;
+}

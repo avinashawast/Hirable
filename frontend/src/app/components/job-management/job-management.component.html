@@ -1,0 +1,98 @@
+<div class="job-management-container">
+  <h2>Job Management</h2>
+
+  <div class="controls-section">
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Job title or description">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="statusFilter" (ngModelChange)="onStatusFilterChange()">
+          <mat-option *ngFor="let option of statusOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Reject Form -->
+  <mat-card *ngIf="showRejectForm && selectedJobForReject" class="form-card">
+    <mat-card-header>
+      <mat-card-title>Reject Job: {{ selectedJobForReject.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Rejection Reason</mat-label>
+        <textarea matInput [(ngModel)]="rejectionReason" placeholder="Enter reason for rejection" rows="4"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="rejectJob()">Reject</button>
+      <button mat-raised-button (click)="closeRejectForm()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Jobs Table -->
+  <mat-card class="jobs-table-card">
+    <mat-card-header>
+      <mat-card-title>Jobs ({{ filteredJobs.length }})</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="filteredJobs" class="jobs-table">
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let job">{{ job.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="recruiter">
+          <th mat-header-cell *matHeaderCellDef>Recruiter</th>
+          <td mat-cell *matCellDef="let job">{{ job.recruiter?.companyName || 'N/A' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef>Location</th>
+          <td mat-cell *matCellDef="let job">{{ job.location }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let job">
+            <mat-chip [color]="getStatusColor(job.status!)" selected>
+              {{ job.status }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="postedAt">
+          <th mat-header-cell *matHeaderCellDef>Posted</th>
+          <td mat-cell *matCellDef="let job">{{ job.postedAt | date: 'short' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let job">
+            <button mat-icon-button matTooltip="Approve" *ngIf="canApprove(job)" (click)="approveJob(job)" color="accent">
+              <mat-icon>check_circle</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Reject" *ngIf="canReject(job)" (click)="openRejectForm(job)" color="warn">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Remove" *ngIf="canRemove(job)" (click)="removeJob(job)" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="View Details" (click)="openRejectForm(job)">
+              <mat-icon>info</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

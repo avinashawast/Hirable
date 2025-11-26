@@ -1,0 +1,81 @@
+<div class="chat-moderation-container">
+  <div class="header">
+    <h1>Chat Moderation</h1>
+    <button mat-raised-button color="primary" (click)="loadChats()">
+      <mat-icon>refresh</mat-icon> Refresh
+    </button>
+  </div>
+
+  <mat-progress-spinner *ngIf="loading" diameter="50" class="loading-spinner"></mat-progress-spinner>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && chats.length === 0" class="no-data">
+    <p>No chats found</p>
+  </div>
+
+  <div *ngIf="!loading && chats.length > 0" class="table-container">
+    <table mat-table [dataSource]="chats" class="chats-table">
+      <!-- Recruiter Name Column -->
+      <ng-container matColumnDef="recruiterName">
+        <th mat-header-cell *matHeaderCellDef>Recruiter</th>
+        <td mat-cell *matCellDef="let element">{{ element.recruiterName }}</td>
+      </ng-container>
+
+      <!-- Job Seeker Name Column -->
+      <ng-container matColumnDef="jobSeekerName">
+        <th mat-header-cell *matHeaderCellDef>Job Seeker</th>
+        <td mat-cell *matCellDef="let element">{{ element.jobSeekerName }}</td>
+      </ng-container>
+
+      <!-- Message Count Column -->
+      <ng-container matColumnDef="messageCount">
+        <th mat-header-cell *matHeaderCellDef>Messages</th>
+        <td mat-cell *matCellDef="let element">{{ element.messageCount }}</td>
+      </ng-container>
+
+      <!-- Flagged Column -->
+      <ng-container matColumnDef="flagged">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.flagged" class="flagged-badge">
+            <mat-icon>flag</mat-icon> Flagged
+          </span>
+          <span *ngIf="!element.flagged" class="active-badge">
+            <mat-icon>check_circle</mat-icon> Active
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Created At Column -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Created</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdAt | date: 'short' }}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button matTooltip="View Chat History" (click)="viewChatHistory(element.id)">
+            <mat-icon>history</mat-icon>
+          </button>
+          <button *ngIf="!element.flagged" mat-icon-button matTooltip="Flag Chat" color="warn" (click)="flagChat(element)">
+            <mat-icon>flag</mat-icon>
+          </button>
+          <button *ngIf="element.flagged" mat-icon-button matTooltip="Unflag Chat" color="accent" (click)="unflagChat(element)">
+            <mat-icon>flag_off</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Disable User Chat" color="warn" (click)="disableUserChat(element)">
+            <mat-icon>block</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>My Applications</h1>
+    <app-notification></app-notification>
+  </div>
+
+  <mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
+
+  <div *ngIf="!loading" class="applications-section">
+    <div *ngIf="applications.length === 0" class="no-applications">
+      <p>You haven't applied to any jobs yet.</p>
+      <button mat-raised-button color="primary" (click)="searchMoreJobs()">
+        Search Jobs
+      </button>
+    </div>
+
+    <div *ngIf="applications.length > 0">
+      <div class="applications-list">
+        <mat-card *ngFor="let app of applications" class="application-card">
+          <mat-card-header>
+            <mat-card-title>{{ app.jobTitle }}</mat-card-title>
+            <mat-card-subtitle>{{ app.companyName }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="application-details">
+              <div class="detail-item">
+                <strong>Status:</strong>
+                <span [ngClass]="'status-' + app.status.toLowerCase()">{{ app.status }}</span>
+              </div>
+              <div class="detail-item">
+                <strong>Applied:</strong> {{ app.appliedAt | date:'short' }}
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" (click)="searchMoreJobs()">
+          Search More Jobs
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

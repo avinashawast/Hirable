@@ -1,0 +1,75 @@
+<div class="job-search-container">
+  <div class="search-filters">
+    <h2>Search Jobs</h2>
+    
+    <div class="filter-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Keyword</mat-label>
+        <input matInput [(ngModel)]="keyword" placeholder="Job title, skills...">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Location</mat-label>
+        <input matInput [(ngModel)]="location" placeholder="City or region">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Industry</mat-label>
+        <mat-select [(ngModel)]="industry">
+          <mat-option value="">All Industries</mat-option>
+          <mat-option *ngFor="let ind of industries" [value]="ind">{{ ind }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Experience Level</mat-label>
+        <mat-select [(ngModel)]="experienceLevel">
+          <mat-option value="">All Levels</mat-option>
+          <mat-option *ngFor="let level of experienceLevels" [value]="level">{{ level }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="button-row">
+      <button mat-raised-button color="primary" (click)="searchJobs()">Search</button>
+      <button mat-stroked-button (click)="resetFilters()">Reset</button>
+    </div>
+  </div>
+
+  <div class="search-results">
+    <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+
+    <div *ngIf="!loading && jobs.length === 0" class="no-results">
+      <p>No jobs found. Try adjusting your search criteria.</p>
+    </div>
+
+    <div *ngIf="!loading && jobs.length > 0">
+      <mat-card *ngFor="let job of jobs" class="job-card">
+        <mat-card-header>
+          <mat-card-title>{{ job.title }}</mat-card-title>
+          <mat-card-subtitle>{{ job.location }} | {{ job.industry }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="description">{{ job.description | slice:0:150 }}...</p>
+          <div class="job-details">
+            <span class="badge">{{ job.experienceLevel }}</span>
+            <span class="skills" *ngIf="job.requiredSkills">
+              {{ job.requiredSkills.slice(0, 3).join(', ') }}
+              <span *ngIf="job.requiredSkills.length > 3">+{{ job.requiredSkills.length - 3 }}</span>
+            </span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="viewJobDetails(job.id!)">View Details</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-paginator
+        [length]="totalElements"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[20]"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

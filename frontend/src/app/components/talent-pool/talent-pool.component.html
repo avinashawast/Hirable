@@ -1,0 +1,170 @@
+<div class="talent-pool-container">
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-card-title>Talent Pool Management</mat-card-title>
+      <mat-card-subtitle>View and manage all job seeker profiles and resumes</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card class="filters-card">
+    <mat-card-content>
+      <div class="filters-row">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search by name, email, or location</mat-label>
+          <input matInput [(ngModel)]="searchQuery" (input)="onSearchChange()" placeholder="Search...">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Flag Status</mat-label>
+          <mat-select [(ngModel)]="flagFilter" (selectionChange)="onFlagFilterChange()">
+            <mat-option value="">All Profiles</mat-option>
+            <mat-option value="flagged">Flagged Only</mat-option>
+            <mat-option value="unflagged">Unflagged Only</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="profiles-card">
+    <mat-card-content>
+      <div class="profiles-list">
+        <div *ngIf="filteredProfiles.length === 0" class="no-data">
+          <p>No profiles found</p>
+        </div>
+
+        <div *ngFor="let profile of filteredProfiles" class="profile-item">
+          <div class="profile-header">
+            <div class="profile-info">
+              <h3>{{ profile.firstName }} {{ profile.lastName }}</h3>
+              <p class="email">{{ profile.email }}</p>
+              <p class="location">
+                <mat-icon>location_on</mat-icon>
+                {{ profile.location }}
+              </p>
+            </div>
+            <div class="profile-status">
+              <span *ngIf="profile.flagged" class="flag-badge">
+                <mat-icon>flag</mat-icon>
+                Flagged
+              </span>
+              <span *ngIf="!profile.flagged" class="unflag-badge">
+                <mat-icon>check_circle</mat-icon>
+                Active
+              </span>
+            </div>
+          </div>
+
+          <div class="profile-details">
+            <div class="skills-section">
+              <strong>Skills:</strong>
+              <mat-chip-set aria-label="Skills">
+                <mat-chip *ngFor="let skill of profile.skills.slice(0, 5)">
+                  {{ skill }}
+                </mat-chip>
+                <mat-chip *ngIf="profile.skills.length > 5" disabled>
+                  +{{ profile.skills.length - 5 }} more
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+
+            <div class="resume-section" *ngIf="profile.resumeFilePath">
+              <strong>Resume:</strong>
+              <p class="resume-date">Uploaded: {{ profile.resumeUploadedAt | date: 'short' }}</p>
+            </div>
+
+            <div class="flag-reason" *ngIf="profile.flagged && profile.flagReason">
+              <strong>Flag Reason:</strong>
+              <p>{{ profile.flagReason }}</p>
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <button mat-stroked-button (click)="viewProfile(profile)">
+              <mat-icon>visibility</mat-icon>
+              View Details
+            </button>
+            <button mat-stroked-button *ngIf="profile.resumeFilePath" (click)="downloadResume(profile)">
+              <mat-icon>download</mat-icon>
+              Download Resume
+            </button>
+            <button mat-stroked-button color="warn" *ngIf="!profile.flagged" (click)="openFlagDialog(profile)">
+              <mat-icon>flag</mat-icon>
+              Flag
+            </button>
+            <button mat-stroked-button color="accent" *ngIf="profile.flagged" (click)="unflagProfile(profile)">
+              <mat-icon>flag_off</mat-icon>
+              Unflag
+            </button>
+            <button mat-stroked-button color="warn" (click)="removeProfile(profile)">
+              <mat-icon>delete</mat-icon>
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Profile Details Modal -->
+  <div *ngIf="showProfileDetails && selectedProfile" class="modal-overlay" (click)="closeProfileDetails()">
+    <mat-card class="profile-modal" (click)="$event.stopPropagation()">
+      <mat-card-header>
+        <mat-card-title>{{ selectedProfile.firstName }} {{ selectedProfile.lastName }}</mat-card-title>
+        <button mat-icon-button (click)="closeProfileDetails()" class="close-button">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="modal-content">
+          <div class="detail-section">
+            <h4>Contact Information</h4>
+            <p><strong>Email:</strong> {{ selectedProfile.email }}</p>
+            <p><strong>Phone:</strong> {{ selectedProfile.phone }}</p>
+            <p><strong>Location:</strong> {{ selectedProfile.location }}</p>
+          </div>
+
+          <div class="detail-section">
+            <h4>Professional Summary</h4>
+            <p>{{ selectedProfile.summary || 'No summary provided' }}</p>
+          </div>
+
+          <div class="detail-section">
+            <h4>Skills</h4>
+            <mat-chip-set aria-label="All Skills">
+              <mat-chip *ngFor="let skill of selectedProfile.skills">
+                {{ skill }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+
+          <div class="detail-section">
+            <h4>Resume Information</h4>
+            <p *ngIf="selectedProfile.resumeFilePath">
+              <strong>Uploaded:</strong> {{ selectedProfile.resumeUploadedAt | date: 'medium' }}
+            </p>
+            <p *ngIf="!selectedProfile.resumeFilePath">No resume uploaded</p>
+          </div>
+
+          <div class="detail-section" *ngIf="selectedProfile.flagged">
+            <h4>Flag Information</h4>
+            <p><strong>Status:</strong> Flagged</p>
+            <p><strong>Reason:</strong> {{ selectedProfile.flagReason }}</p>
+          </div>
+
+          <div class="detail-section">
+            <h4>Account Information</h4>
+            <p><strong>Created:</strong> {{ selectedProfile.createdAt | date: 'medium' }}</p>
+            <p><strong>Last Updated:</strong> {{ selectedProfile.updatedAt | date: 'medium' }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button (click)="closeProfileDetails()">Close</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

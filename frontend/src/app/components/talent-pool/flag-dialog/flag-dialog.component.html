@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Flag Profile</h2>
+
+<mat-dialog-content>
+  <p>You are flagging the profile of <strong>{{ data.profile.firstName }} {{ data.profile.lastName }}</strong></p>
+  
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Reason for flagging</mat-label>
+    <textarea matInput 
+              [(ngModel)]="reason" 
+              placeholder="Enter the reason for flagging this profile..."
+              rows="4"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="warn" (click)="onFlag()" [disabled]="!reason.trim()">
+    Flag Profile
+  </button>
+</mat-dialog-actions>

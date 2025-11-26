@@ -1,0 +1,155 @@
+<div class="candidate-profile-container">
+  <button mat-icon-button (click)="goBack()" class="back-button">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <div *ngIf="isLoading" class="loading">
+    <mat-spinner></mat-spinner>
+    <p>Loading candidate profile...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <mat-icon>error</mat-icon>
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="candidate && !isLoading" class="profile-content">
+    <!-- Header Section -->
+    <mat-card class="header-card">
+      <mat-card-header>
+        <div class="header-content">
+          <div class="candidate-name">
+            <h1>{{ candidate.firstName }} {{ candidate.lastName }}</h1>
+            <p class="location">
+              <mat-icon>location_on</mat-icon>
+              {{ candidate.location }}
+            </p>
+          </div>
+          <div class="relevance-info" *ngIf="candidate.relevanceScore">
+            <div class="score-badge">
+              {{ getRelevancePercentage(candidate.relevanceScore) }}%
+            </div>
+            <p class="score-label">Match Score</p>
+          </div>
+        </div>
+      </mat-card-header>
+    </mat-card>
+
+    <!-- Summary Section -->
+    <mat-card *ngIf="candidate.summary" class="section-card">
+      <mat-card-header>
+        <mat-card-title>Professional Summary</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ candidate.summary }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Skills Section -->
+    <mat-card *ngIf="candidate.skills && candidate.skills.length > 0" class="section-card">
+      <mat-card-header>
+        <mat-card-title>Skills</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-set>
+          <mat-chip *ngFor="let skill of candidate.skills">
+            {{ skill }}
+          </mat-chip>
+        </mat-chip-set>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Experience Section -->
+    <mat-card *ngIf="candidate.experiences && candidate.experiences.length > 0" class="section-card">
+      <mat-card-header>
+        <mat-card-title>Work Experience</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngFor="let exp of candidate.experiences" class="experience-item">
+          <div class="exp-header">
+            <h4>{{ exp.title }}</h4>
+            <span class="company">{{ exp.company }}</span>
+          </div>
+          <div class="exp-dates">
+            <span *ngIf="exp.startDate">{{ exp.startDate | date: 'MMM yyyy' }}</span>
+            <span *ngIf="exp.startDate && exp.endDate"> - </span>
+            <span *ngIf="exp.endDate">{{ exp.endDate | date: 'MMM yyyy' }}</span>
+            <span *ngIf="!exp.endDate" class="current">Present</span>
+          </div>
+          <p *ngIf="exp.description" class="description">{{ exp.description }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Education Section -->
+    <mat-card *ngIf="candidate.educations && candidate.educations.length > 0" class="section-card">
+      <mat-card-header>
+        <mat-card-title>Education</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngFor="let edu of candidate.educations" class="education-item">
+          <div class="edu-header">
+            <h4>{{ edu.degree }}</h4>
+            <span class="institution">{{ edu.institution }}</span>
+          </div>
+          <p class="field" *ngIf="edu.fieldOfStudy">{{ edu.fieldOfStudy }}</p>
+          <p class="graduation" *ngIf="edu.graduationDate">
+            Graduated: {{ edu.graduationDate | date: 'MMM yyyy' }}
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Resume Section -->
+    <mat-card *ngIf="candidate.resumeFilePath" class="section-card">
+      <mat-card-header>
+        <mat-card-title>Resume</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="resume-info">
+          <p *ngIf="candidate.resumeUploadedAt">
+            <strong>Last Updated:</strong> {{ candidate.resumeUploadedAt | date: 'short' }}
+          </p>
+          <button mat-raised-button color="primary" (click)="downloadResume()">
+            <mat-icon>download</mat-icon>
+            Download Resume
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Contact Section -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>Contact Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="contact-info">
+          <p *ngIf="candidate.phone">
+            <mat-icon>phone</mat-icon>
+            <span>{{ candidate.phone }}</span>
+          </p>
+          <p *ngIf="candidate.location">
+            <mat-icon>location_on</mat-icon>
+            <span>{{ candidate.location }}</span>
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Actions Section -->
+    <mat-card class="section-card actions-card">
+      <mat-card-content>
+        <button
+          mat-raised-button
+          [color]="isShortlisted ? 'warn' : 'accent'"
+          (click)="toggleShortlist()"
+          class="action-button"
+        >
+          <mat-icon>{{ isShortlisted ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+          {{ isShortlisted ? 'Remove from Shortlist' : 'Add to Shortlist' }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

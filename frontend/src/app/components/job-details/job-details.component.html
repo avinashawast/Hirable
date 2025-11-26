@@ -1,0 +1,46 @@
+<div class="job-details-container">
+  <button mat-button (click)="goBack()" class="back-button">← Back to Search</button>
+
+  <mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
+
+  <mat-card *ngIf="!loading && job" class="job-card">
+    <mat-card-header>
+      <mat-card-title>{{ job.title }}</mat-card-title>
+      <mat-card-subtitle>{{ job.location }} | {{ job.industry }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="job-meta">
+        <div class="meta-item">
+          <strong>Experience Level:</strong> {{ job.experienceLevel }}
+        </div>
+        <div class="meta-item">
+          <strong>Posted:</strong> {{ job.postedAt | date:'short' }}
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Description</h3>
+        <p>{{ job.description }}</p>
+      </div>
+
+      <div class="section" *ngIf="job.requiredSkills && job.requiredSkills.length > 0">
+        <h3>Required Skills</h3>
+        <div class="skills-list">
+          <span class="skill-tag" *ngFor="let skill of job.requiredSkills">{{ skill }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="applyForJob()"
+        [disabled]="hasApplied || applying">
+        <mat-spinner *ngIf="applying" diameter="20" class="inline-spinner"></mat-spinner>
+        <span *ngIf="!applying">{{ hasApplied ? 'Already Applied' : 'Apply Now' }}</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

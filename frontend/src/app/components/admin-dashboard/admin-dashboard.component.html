@@ -1,0 +1,180 @@
+<div class="admin-dashboard-container">
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="viewFullAnalytics()">
+        <mat-icon>analytics</mat-icon> View Full Analytics
+      </button>
+    </div>
+  </div>
+
+  <mat-progress-spinner *ngIf="loading" diameter="50" class="loading-spinner"></mat-progress-spinner>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="analytics && !loading" class="dashboard-content">
+    <!-- Quick Stats -->
+    <div class="quick-stats">
+      <h2>Quick Overview</h2>
+      <div class="stats-grid">
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>people</mat-icon>
+            <div class="stat-value">{{ analytics.totalJobSeekers }}</div>
+            <div class="stat-label">Job Seekers</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>business</mat-icon>
+            <div class="stat-value">{{ analytics.totalRecruiters }}</div>
+            <div class="stat-label">Recruiters</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>work</mat-icon>
+            <div class="stat-value">{{ analytics.totalJobs }}</div>
+            <div class="stat-label">Total Jobs</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>check_circle</mat-icon>
+            <div class="stat-value">{{ analytics.approvedJobs }}</div>
+            <div class="stat-label">Approved Jobs</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>pending</mat-icon>
+            <div class="stat-value">{{ analytics.pendingJobs }}</div>
+            <div class="stat-label">Pending Jobs</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>assignment</mat-icon>
+            <div class="stat-value">{{ analytics.totalApplications }}</div>
+            <div class="stat-label">Applications</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>chat</mat-icon>
+            <div class="stat-value">{{ analytics.totalChats }}</div>
+            <div class="stat-label">Chats</div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon>message</mat-icon>
+            <div class="stat-value">{{ analytics.totalMessages }}</div>
+            <div class="stat-label">Messages</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Management Actions -->
+    <div class="management-section">
+      <h2>Management</h2>
+      <div class="action-buttons">
+        <button mat-raised-button color="accent" (click)="navigateTo('/user-management')">
+          <mat-icon>people</mat-icon> Manage Users
+        </button>
+        <button mat-raised-button color="accent" (click)="navigateTo('/job-management')">
+          <mat-icon>work</mat-icon> Manage Jobs
+        </button>
+        <button mat-raised-button color="accent" (click)="navigateTo('/talent-pool')">
+          <mat-icon>person_search</mat-icon> Talent Pool
+        </button>
+        <button mat-raised-button color="accent" (click)="navigateTo('/system-config')">
+          <mat-icon>settings</mat-icon> System Config
+        </button>
+        <button mat-raised-button color="accent" (click)="navigateTo('/chat-moderation')">
+          <mat-icon>chat</mat-icon> Chat Moderation
+        </button>
+      </div>
+    </div>
+
+    <!-- Activity Summary -->
+    <div class="activity-summary">
+      <h2>Activity Summary</h2>
+      <div class="summary-grid">
+        <mat-card class="summary-card">
+          <mat-card-header>
+            <mat-card-title>Recruiter Activity</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="summary-item">
+              <span>Jobs Posted:</span>
+              <strong>{{ analytics.recruiterActivity.totalJobsPosted }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Jobs Approved:</span>
+              <strong>{{ analytics.recruiterActivity.jobsApproved }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Jobs Rejected:</span>
+              <strong>{{ analytics.recruiterActivity.jobsRejected }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Candidates Contacted:</span>
+              <strong>{{ analytics.recruiterActivity.candidatesContacted }}</strong>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="summary-card">
+          <mat-card-header>
+            <mat-card-title>Job Seeker Activity</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="summary-item">
+              <span>Applications Submitted:</span>
+              <strong>{{ analytics.jobSeekerActivity.totalApplicationsSubmitted }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Profiles with Resumes:</span>
+              <strong>{{ analytics.jobSeekerActivity.profilesWithResumes }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Avg Applications per Seeker:</span>
+              <strong>{{ analytics.jobSeekerActivity.averageApplicationsPerSeeker }}</strong>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="summary-card">
+          <mat-card-header>
+            <mat-card-title>Chat Activity</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="summary-item">
+              <span>Total Chats:</span>
+              <strong>{{ analytics.chatActivity.totalChats }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Total Messages:</span>
+              <strong>{{ analytics.chatActivity.totalMessages }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Avg Messages per Chat:</span>
+              <strong>{{ analytics.chatActivity.averageMessagesPerChat }}</strong>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

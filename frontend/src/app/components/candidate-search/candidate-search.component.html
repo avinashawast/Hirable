@@ -1,0 +1,145 @@
+<div class="candidate-search-container">
+  <mat-card class="search-card">
+    <mat-card-header>
+      <mat-card-title>Search Candidates</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="search-filters">
+        <!-- Skills Filter -->
+        <div class="filter-group">
+          <label>Skills</label>
+          <div class="skill-input-group">
+            <input
+              matInput
+              [(ngModel)]="skillsInput"
+              placeholder="Enter skill and press Add"
+              (keyup.enter)="addSkill()"
+            />
+            <button mat-raised-button color="primary" (click)="addSkill()">
+              Add Skill
+            </button>
+          </div>
+          <div class="selected-skills">
+            <mat-chip-set>
+              <mat-chip
+                *ngFor="let skill of selectedSkills"
+                removable
+                (removed)="removeSkill(skill)"
+              >
+                {{ skill }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+        </div>
+
+        <!-- Experience Filter -->
+        <div class="filter-group">
+          <label>Experience Level</label>
+          <mat-select [(ngModel)]="experience" placeholder="Select experience level">
+            <mat-option value="">All Levels</mat-option>
+            <mat-option *ngFor="let level of experienceLevels" [value]="level">
+              {{ level }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <!-- Location Filter -->
+        <div class="filter-group">
+          <label>Location</label>
+          <input
+            matInput
+            [(ngModel)]="location"
+            placeholder="Enter location"
+          />
+        </div>
+
+        <!-- Search and Clear Buttons -->
+        <div class="button-group">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="searchCandidates()"
+            [disabled]="isLoading"
+          >
+            <mat-icon *ngIf="!isLoading">search</mat-icon>
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            Search
+          </button>
+          <button mat-stroked-button (click)="clearFilters()">
+            Clear Filters
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Search Results -->
+  <div *ngIf="hasSearched" class="results-section">
+    <mat-card *ngIf="searchResults.length === 0 && !isLoading" class="no-results">
+      <mat-card-content>
+        <p>No candidates found matching your criteria.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <div *ngIf="searchResults.length > 0" class="results-list">
+      <h3>Search Results ({{ searchResults.length }} candidates)</h3>
+      <mat-card *ngFor="let candidate of searchResults" class="candidate-card">
+        <mat-card-header>
+          <div class="candidate-header">
+            <div class="candidate-info">
+              <h4>{{ candidate.firstName }} {{ candidate.lastName }}</h4>
+              <p class="location">
+                <mat-icon>location_on</mat-icon>
+                {{ candidate.location }}
+              </p>
+            </div>
+            <div class="relevance-score">
+              <div class="score-badge">
+                {{ getRelevancePercentage(candidate.relevanceScore) }}%
+              </div>
+              <p class="score-label">Match</p>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="candidate-details">
+            <div class="detail-group">
+              <label>Skills:</label>
+              <mat-chip-set>
+                <mat-chip *ngFor="let skill of candidate.skills">
+                  {{ skill }}
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+            <div class="detail-group">
+              <label>Experience:</label>
+              <p>{{ candidate.experience }} position(s)</p>
+            </div>
+            <div class="detail-group" *ngIf="candidate.lastResumeUpdate">
+              <label>Resume Updated:</label>
+              <p>{{ candidate.lastResumeUpdate | date: 'short' }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="viewCandidateProfile(candidate.candidateId)"
+          >
+            View Profile
+          </button>
+          <button
+            mat-raised-button
+            [color]="isShortlisted(candidate.candidateId) ? 'warn' : 'accent'"
+            (click)="toggleShortlist(candidate.candidateId)"
+          >
+            <mat-icon>{{ isShortlisted(candidate.candidateId) ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+            {{ isShortlisted(candidate.candidateId) ? 'Remove from Shortlist' : 'Add to Shortlist' }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+<div class="user-management-container">
+  <h2>User Management</h2>
+
+  <div class="controls-section">
+    <button mat-raised-button color="primary" (click)="openCreateForm()">
+      <mat-icon>add</mat-icon> Create User
+    </button>
+
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Username or email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="roleFilter" (ngModelChange)="onRoleFilterChange()">
+          <mat-option value="">All Roles</mat-option>
+          <mat-option value="ADMIN">Admin</mat-option>
+          <mat-option value="JOB_SEEKER">Job Seeker</mat-option>
+          <mat-option value="RECRUITER">Recruiter</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="statusFilter" (ngModelChange)="onStatusFilterChange()">
+          <mat-option value="">All Status</mat-option>
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="inactive">Inactive</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Create User Form -->
+  <mat-card *ngIf="showCreateForm" class="form-card">
+    <mat-card-header>
+      <mat-card-title>Create New User</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="newUser.username" placeholder="Enter username">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="newUser.email" placeholder="Enter email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="newUser.password" placeholder="Enter password">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="newUser.role">
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="createUser()">Create</button>
+      <button mat-raised-button (click)="closeCreateForm()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Edit User Form -->
+  <mat-card *ngIf="showEditForm && selectedUser" class="form-card">
+    <mat-card-header>
+      <mat-card-title>Edit User</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="selectedUser.username" disabled>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="selectedUser.email" placeholder="Enter email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="selectedUser.role">
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="updateUser()">Update</button>
+      <button mat-raised-button (click)="closeEditForm()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Users Table -->
+  <mat-card class="users-table-card">
+    <mat-card-header>
+      <mat-card-title>Users ({{ filteredUsers.length }})</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="filteredUsers" class="users-table">
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef>Username</th>
+          <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef>Role</th>
+          <td mat-cell *matCellDef="let user">
+            <mat-chip [color]="user.role === 'ADMIN' ? 'warn' : 'primary'" selected>
+              {{ user.role }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let user">
+            <mat-chip [color]="user.active ? 'accent' : 'warn'" selected>
+              {{ user.active ? 'Active' : 'Inactive' }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>Created</th>
+          <td mat-cell *matCellDef="let user">{{ user.createdAt | date: 'short' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let user">
+            <button mat-icon-button matTooltip="Edit" (click)="openEditForm(user)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Deactivate" *ngIf="user.active" (click)="deactivateUser(user)">
+              <mat-icon>block</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Activate" *ngIf="!user.active" (click)="activateUser(user)">
+              <mat-icon>check_circle</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['username', 'email', 'role', 'status', 'createdAt', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['username', 'email', 'role', 'status', 'createdAt', 'actions'];"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
