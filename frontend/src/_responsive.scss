@@ -1,0 +1,727 @@
+// ============================================================================
+// RESPONSIVE DESIGN ADJUSTMENTS
+// ============================================================================
+// This file contains responsive design adjustments for all breakpoints:
+// Mobile: 0-599px, Tablet: 600-959px, Desktop: 960px+
+// Includes typography scaling, spacing adjustments, and layout changes
+
+// ============================================================================
+// MOBILE RESPONSIVE ADJUSTMENTS (0-599px)
+// ============================================================================
+
+@media (max-width: 599px) {
+  // ========================================================================
+  // TYPOGRAPHY SCALING FOR MOBILE
+  // ========================================================================
+  
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    font-size: var(--font-size-body-medium);
+    line-height: var(--line-height-body-medium);
+  }
+
+  // Scale down display and headline sizes for mobile
+  .text-display-large,
+  h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .text-display-medium,
+  h2 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .text-headline-large,
+  h3 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .text-headline-medium,
+  h4 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .text-title-large {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .text-title-medium {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .text-body-large {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .text-body-medium {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .text-body-small {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  // ========================================================================
+  // SPACING ADJUSTMENTS FOR MOBILE
+  // ========================================================================
+
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  // Reduce margins and padding on mobile
+  .mt-1 { margin-top: var(--spacing-xs); }
+  .mt-2 { margin-top: var(--spacing-sm); }
+  .mt-3 { margin-top: var(--spacing-md); }
+  .mt-4 { margin-top: var(--spacing-lg); }
+
+  .mb-1 { margin-bottom: var(--spacing-xs); }
+  .mb-2 { margin-bottom: var(--spacing-sm); }
+  .mb-3 { margin-bottom: var(--spacing-md); }
+  .mb-4 { margin-bottom: var(--spacing-lg); }
+
+  .p-1 { padding: var(--spacing-xs); }
+  .p-2 { padding: var(--spacing-sm); }
+  .p-3 { padding: var(--spacing-md); }
+  .p-4 { padding: var(--spacing-lg); }
+
+  // ========================================================================
+  // BUTTON RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  button,
+  [mat-button],
+  [mat-raised-button],
+  [mat-stroked-button],
+  [mat-flat-button] {
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: var(--font-size-label-medium);
+  }
+
+  [mat-icon-button] {
+    min-width: 44px;
+    min-height: 44px;
+    padding: var(--spacing-sm);
+  }
+
+  [mat-fab],
+  [mat-mini-fab] {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .button-group-vertical {
+    button {
+      width: 100%;
+    }
+  }
+
+  // ========================================================================
+  // CARD RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  mat-card,
+  .card {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+  }
+
+  mat-card-header,
+  .card-header {
+    margin: calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm)) var(--spacing-sm) calc(-1 * var(--spacing-sm));
+    padding: var(--spacing-sm);
+  }
+
+  mat-card-content,
+  .card-content {
+    padding: var(--spacing-sm) 0;
+  }
+
+  mat-card-actions,
+  .card-actions {
+    margin: var(--spacing-sm) calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm));
+    padding: var(--spacing-sm);
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  // Stack horizontal cards vertically on mobile
+  mat-card.card-horizontal,
+  .card.card-horizontal {
+    flex-direction: column;
+
+    mat-card-header,
+    .card-header {
+      border-right: none;
+      border-bottom: 1px solid var(--color-neutral-200);
+      margin: calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm)) var(--spacing-sm) calc(-1 * var(--spacing-sm));
+    }
+
+    mat-card-content,
+    .card-content {
+      padding: var(--spacing-sm);
+    }
+  }
+
+  // Single column grid on mobile
+  .card-grid,
+  .card-grid-2,
+  .card-grid-3,
+  .card-grid-4 {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  // ========================================================================
+  // FORM RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  form {
+    gap: var(--spacing-sm);
+  }
+
+  .form-section {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+
+    .form-section-title {
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-title-medium);
+    }
+  }
+
+  .form-field-row,
+  .form-field-row-2,
+  .form-field-row-3,
+  .form-field-row-4 {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .form-two-column,
+  .form-three-column {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+
+    button {
+      width: 100%;
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  input[matInput],
+  textarea[matInput],
+  select[matInput],
+  .mat-input-element {
+    min-height: 44px;
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  textarea[matInput],
+  textarea.mat-input-element {
+    min-height: 120px;
+  }
+
+  // ========================================================================
+  // NAVIGATION RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  .navbar {
+    height: 56px;
+    padding: 0 var(--spacing-sm);
+  }
+
+  .menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-title {
+    font-size: var(--font-size-title-medium);
+  }
+
+  .sidenav-container {
+    height: calc(100vh - 56px);
+  }
+
+  .sidenav {
+    width: 256px;
+  }
+
+  .content {
+    padding: var(--spacing-sm);
+  }
+
+  .nav-item {
+    padding: 10px var(--spacing-sm);
+    margin: 0 var(--spacing-xs);
+    font-size: var(--font-size-body-small);
+  }
+
+  .nav-icon {
+    margin-right: var(--spacing-sm);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  // ========================================================================
+  // UTILITY ADJUSTMENTS FOR MOBILE
+  // ========================================================================
+
+  .flex-center {
+    flex-direction: column;
+  }
+
+  // Hide elements on mobile if needed
+  .hide-mobile {
+    display: none !important;
+  }
+
+  // Full width elements on mobile
+  .full-width-mobile {
+    width: 100%;
+  }
+}
+
+// ============================================================================
+// TABLET RESPONSIVE ADJUSTMENTS (600-959px)
+// ============================================================================
+
+@media (min-width: 600px) and (max-width: 959px) {
+  // ========================================================================
+  // TYPOGRAPHY SCALING FOR TABLET
+  // ========================================================================
+
+  html {
+    font-size: 15px;
+  }
+
+  .text-display-large,
+  h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .text-display-medium,
+  h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .text-headline-large,
+  h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .text-headline-medium,
+  h4 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  // ========================================================================
+  // SPACING ADJUSTMENTS FOR TABLET
+  // ========================================================================
+
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+
+  // ========================================================================
+  // BUTTON RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  button,
+  [mat-button],
+  [mat-raised-button],
+  [mat-stroked-button],
+  [mat-flat-button] {
+    min-height: 40px;
+    padding: 8px 16px;
+  }
+
+  [mat-icon-button] {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  // ========================================================================
+  // CARD RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  mat-card,
+  .card {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  // Two-column grid on tablet
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // ========================================================================
+  // FORM RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  .form-field-row-3,
+  .form-field-row-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-three-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-two-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // ========================================================================
+  // NAVIGATION RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  .navbar {
+    height: 64px;
+  }
+
+  .menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidenav-container {
+    height: calc(100vh - 64px);
+  }
+
+  .sidenav {
+    width: 280px;
+  }
+
+  .content {
+    padding: var(--spacing-md);
+  }
+
+  // ========================================================================
+  // UTILITY ADJUSTMENTS FOR TABLET
+  // ========================================================================
+
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+// ============================================================================
+// DESKTOP RESPONSIVE ADJUSTMENTS (960px+)
+// ============================================================================
+
+@media (min-width: 960px) {
+  // ========================================================================
+  // TYPOGRAPHY SCALING FOR DESKTOP
+  // ========================================================================
+
+  html {
+    font-size: 16px;
+  }
+
+  // ========================================================================
+  // SPACING ADJUSTMENTS FOR DESKTOP
+  // ========================================================================
+
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  // ========================================================================
+  // BUTTON RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  button,
+  [mat-button],
+  [mat-raised-button],
+  [mat-stroked-button],
+  [mat-flat-button] {
+    min-height: 36px;
+    padding: 8px 16px;
+  }
+
+  [mat-icon-button] {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  // ========================================================================
+  // CARD RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  mat-card,
+  .card {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  // Full grid layouts on desktop
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  // ========================================================================
+  // FORM RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  .form-field-row-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-field-row-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .form-field-row-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .form-two-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-three-column {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // ========================================================================
+  // NAVIGATION RESPONSIVE ADJUSTMENTS
+  // ========================================================================
+
+  .navbar {
+    height: 64px;
+  }
+
+  .menu-button {
+    display: none;
+  }
+
+  .sidenav-container {
+    height: calc(100vh - 64px);
+  }
+
+  .sidenav {
+    width: 280px;
+  }
+
+  .content {
+    padding: var(--spacing-lg);
+  }
+
+  // ========================================================================
+  // UTILITY ADJUSTMENTS FOR DESKTOP
+  // ========================================================================
+
+  .hide-desktop {
+    display: none !important;
+  }
+
+  .show-desktop {
+    display: block !important;
+  }
+}
+
+// ============================================================================
+// ACCESSIBILITY: REDUCED MOTION SUPPORT
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  button,
+  [mat-button],
+  [mat-raised-button],
+  [mat-stroked-button],
+  [mat-flat-button],
+  [mat-icon-button],
+  [mat-fab],
+  [mat-mini-fab] {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+
+    &:active {
+      transform: none;
+    }
+  }
+
+  mat-card,
+  .card {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  mat-card.card-interactive,
+  .card.card-interactive {
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// ============================================================================
+// ACCESSIBILITY: HIGH CONTRAST MODE
+// ============================================================================
+
+@media (prefers-contrast: more) {
+  button,
+  [mat-button],
+  [mat-raised-button],
+  [mat-stroked-button],
+  [mat-flat-button] {
+    border: 2px solid currentColor;
+  }
+
+  input[matInput],
+  textarea[matInput],
+  select[matInput] {
+    border: 2px solid var(--color-neutral-900);
+  }
+
+  .form-field-error,
+  .form-field-success {
+    border-width: 2px;
+  }
+
+  mat-card,
+  .card {
+    border: 2px solid var(--color-neutral-900);
+  }
+}
+
+// ============================================================================
+// ACCESSIBILITY: DARK MODE SUPPORT (if implemented)
+// ============================================================================
+
+@media (prefers-color-scheme: dark) {
+  // This section can be expanded if dark mode is implemented
+  // For now, the design system uses light mode as default
+}
+
+// ============================================================================
+// PRINT STYLES
+// ============================================================================
+
+@media print {
+  .navbar,
+  .sidenav,
+  .menu-button,
+  .user-menu-button,
+  .button-group,
+  .form-actions {
+    display: none;
+  }
+
+  .content {
+    padding: 0;
+  }
+
+  mat-card,
+  .card {
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid var(--color-neutral-300);
+  }
+
+  button,
+  [mat-button],
+  [mat-raised-button],
+  [mat-stroked-button],
+  [mat-flat-button] {
+    border: 1px solid var(--color-neutral-900);
+  }
+}

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import { Stomp, CompatClient } from '@stomp/stompjs';
 
 export interface ChatDTO {
   id?: number;
@@ -36,7 +36,7 @@ export interface ChatMessageRequest {
 })
 export class ChatService {
   private apiUrl = 'http://localhost:8080/api';
-  private stompClient: any;
+  private stompClient: CompatClient | null = null;
   private messageSubject = new Subject<MessageDTO>();
   public messages$ = this.messageSubject.asObservable();
 
@@ -47,11 +47,13 @@ export class ChatService {
   private connect(): void {
     const socket = new SockJS('http://localhost:8080/ws');
     this.stompClient = Stomp.over(socket);
-    this.stompClient.connect({}, (frame: any) => {
-      console.log('WebSocket connected:', frame);
-    }, (error: any) => {
-      console.error('WebSocket connection error:', error);
-    });
+    if (this.stompClient) {
+      this.stompClient.connect({}, (frame: any) => {
+        console.log('WebSocket connected:', frame);
+      }, (error: any) => {
+        console.error('WebSocket connection error:', error);
+      });
+    }
   }
 
   subscribeToMessages(userId: number): void {

@@ -1,20 +1,20 @@
 .talent-pool-container {
-  padding: 20px;
+  padding: var(--spacing-lg);
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .header-card {
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .filters-card {
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .filters-row {
   display: flex;
-  gap: 16px;
+  gap: var(--spacing-lg);
   flex-wrap: wrap;
 }
 
@@ -28,53 +28,67 @@
 }
 
 .profiles-card {
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .profiles-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-lg);
 }
 
 .no-data {
   text-align: center;
-  padding: 40px 20px;
-  color: #999;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+  color: var(--color-neutral-500);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
 }
 
 .profile-item {
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 16px;
-  background-color: #fafafa;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}
+
+.profile-item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-neutral-300);
 }
 
 .profile-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .profile-info h3 {
-  margin: 0 0 4px 0;
-  font-size: 18px;
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: var(--font-size-title-large);
+  line-height: var(--line-height-title-large);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-900);
 }
 
 .profile-info .email {
   margin: 0;
-  color: #666;
-  font-size: 14px;
+  color: var(--color-neutral-600);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
 }
 
 .profile-info .location {
-  margin: 4px 0 0 0;
-  color: #999;
-  font-size: 14px;
+  margin: var(--spacing-xs) 0 0 0;
+  color: var(--color-neutral-500);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-xs);
 }
 
 .profile-info .location mat-icon {
@@ -85,19 +99,20 @@
 
 .profile-status {
   display: flex;
-  gap: 8px;
+  gap: var(--spacing-sm);
 }
 
 .flag-badge {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  background-color: #ffebee;
-  color: #c62828;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--color-error);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+  font-weight: var(--font-weight-medium);
 }
 
 .flag-badge mat-icon {
@@ -109,13 +124,14 @@
 .unflag-badge {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--color-success);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+  font-weight: var(--font-weight-medium);
 }
 
 .unflag-badge mat-icon {
@@ -125,66 +141,78 @@
 }
 
 .profile-details {
-  margin-bottom: 12px;
-  padding: 12px 0;
-  border-top: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  border-top: 1px solid var(--color-neutral-200);
+  border-bottom: 1px solid var(--color-neutral-200);
 }
 
 .skills-section {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .skills-section strong {
   display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-800);
 }
 
 .resume-section {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .resume-section strong {
   display: block;
-  margin-bottom: 4px;
-  font-size: 14px;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-800);
 }
 
 .resume-date {
   margin: 0;
-  color: #999;
-  font-size: 12px;
+  color: var(--color-neutral-500);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
 }
 
 .flag-reason {
-  margin-top: 12px;
-  padding: 8px;
-  background-color: #fff3e0;
-  border-left: 3px solid #ff9800;
-  border-radius: 2px;
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background-color: rgba(255, 152, 0, 0.1);
+  border-left: 3px solid var(--color-warning);
+  border-radius: var(--border-radius-md);
 }
 
 .flag-reason strong {
   display: block;
-  margin-bottom: 4px;
-  font-size: 14px;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-800);
 }
 
 .flag-reason p {
   margin: 0;
-  font-size: 13px;
-  color: #666;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+  color: var(--color-neutral-600);
 }
 
 .profile-actions {
   display: flex;
-  gap: 8px;
+  gap: var(--spacing-sm);
   flex-wrap: wrap;
 }
 
 .profile-actions button {
-  font-size: 12px;
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
 }
 
 .modal-overlay {
@@ -206,42 +234,47 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 .close-button {
   position: absolute;
-  right: 8px;
-  top: 8px;
+  right: var(--spacing-sm);
+  top: var(--spacing-sm);
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-lg);
 }
 
 .detail-section {
-  padding: 12px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
+  padding: var(--spacing-md);
+  background-color: var(--color-neutral-50);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-neutral-200);
 }
 
 .detail-section h4 {
-  margin: 0 0 8px 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-800);
 }
 
 .detail-section p {
-  margin: 4px 0;
-  font-size: 13px;
-  color: #666;
+  margin: var(--spacing-xs) 0;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+  color: var(--color-neutral-600);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 599px) {
   .talent-pool-container {
-    padding: 12px;
+    padding: var(--spacing-md);
   }
 
   .filters-row {
@@ -255,7 +288,7 @@
 
   .profile-header {
     flex-direction: column;
-    gap: 8px;
+    gap: var(--spacing-sm);
   }
 
   .profile-actions {

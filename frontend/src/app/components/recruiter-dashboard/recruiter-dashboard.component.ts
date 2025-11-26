@@ -24,7 +24,7 @@ import { AuthService } from '../../services/auth.service';
 export class RecruiterDashboardComponent implements OnInit {
   jobs: JobDTO[] = [];
   loading = false;
-  recruiterId: number;
+  recruiterId: number = 0;
   displayedColumns: string[] = ['title', 'location', 'status', 'postedAt', 'actions'];
 
   constructor(
@@ -35,7 +35,7 @@ export class RecruiterDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.recruiterId = this.authService.getUserId();
+    this.recruiterId = this.authService.getUserId() || 0;
     this.loadJobs();
   }
 

@@ -12,6 +12,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { TalentPoolService, TalentPoolProfileDTO } from '../../services/talent-pool.service';
 import { FlagDialogComponent } from './flag-dialog/flag-dialog.component';
 
@@ -31,7 +32,8 @@ import { FlagDialogComponent } from './flag-dialog/flag-dialog.component';
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   templateUrl: './talent-pool.component.html',
   styleUrls: ['./talent-pool.component.css']

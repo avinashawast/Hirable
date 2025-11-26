@@ -1,28 +1,110 @@
 .company-profile-container {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
 }
 
 h2 {
-  margin-bottom: 20px;
+  color: var(--color-neutral-900);
+  margin: 0 0 var(--spacing-lg) 0;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-neutral-200);
+  font-size: var(--font-size-headline-medium);
+  line-height: var(--line-height-headline-medium);
+  font-weight: var(--font-weight-regular);
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-lg);
+}
+
+.form-section {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-md);
+  transition: all var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .section-title {
+    font-size: var(--font-size-title-large);
+    line-height: var(--line-height-title-large);
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--spacing-md) 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-neutral-200);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+}
+
+.form-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
 }
 
 mat-form-field {
   width: 100%;
 }
 
-button {
-  margin-top: 10px;
+.form-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-neutral-200);
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .loading {
   text-align: center;
-  padding: 20px;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.loading p {
+  color: var(--color-neutral-600);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+  margin: 0;
+}
+
+@media (max-width: 599px) {
+  .company-profile-container {
+    padding: var(--spacing-md);
+  }
+
+  .form-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .form-section {
+    padding: var(--spacing-sm);
+  }
 }

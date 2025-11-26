@@ -40,7 +40,7 @@ export class JobPostingFormComponent implements OnInit {
 
   skillInput = '';
   loading = false;
-  recruiterId: number;
+  recruiterId: number = 0;
   industries: TaxonomyDTO[] = [];
   skills: TaxonomyDTO[] = [];
 
@@ -53,7 +53,7 @@ export class JobPostingFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.recruiterId = this.authService.getUserId();
+    this.recruiterId = this.authService.getUserId() || 0;
     this.loadTaxonomies();
   }
 

@@ -5,17 +5,17 @@
     <div class="filter-row">
       <mat-form-field appearance="outline">
         <mat-label>Keyword</mat-label>
-        <input matInput [(ngModel)]="keyword" placeholder="Job title, skills...">
+        <input matInput [(ngModel)]="keyword" placeholder="Job title, skills..." name="keyword">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Location</mat-label>
-        <input matInput [(ngModel)]="location" placeholder="City or region">
+        <input matInput [(ngModel)]="location" placeholder="City or region" name="location">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Industry</mat-label>
-        <mat-select [(ngModel)]="industry">
+        <mat-select [(ngModel)]="industry" name="industry">
           <mat-option value="">All Industries</mat-option>
           <mat-option *ngFor="let ind of industries" [value]="ind">{{ ind }}</mat-option>
         </mat-select>
@@ -23,7 +23,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Experience Level</mat-label>
-        <mat-select [(ngModel)]="experienceLevel">
+        <mat-select [(ngModel)]="experienceLevel" name="experienceLevel">
           <mat-option value="">All Levels</mat-option>
           <mat-option *ngFor="let level of experienceLevels" [value]="level">{{ level }}</mat-option>
         </mat-select>
@@ -44,7 +44,7 @@
     </div>
 
     <div *ngIf="!loading && jobs.length > 0">
-      <mat-card *ngFor="let job of jobs" class="job-card">
+      <mat-card *ngFor="let job of jobs" class="job-card card-interactive">
         <mat-card-header>
           <mat-card-title>{{ job.title }}</mat-card-title>
           <mat-card-subtitle>{{ job.location }} | {{ job.industry }}</mat-card-subtitle>

@@ -1,0 +1,303 @@
+// ============================================================================
+// RESPONSIVE UTILITY CLASSES
+// ============================================================================
+// Additional utility classes for responsive design patterns
+
+// ============================================================================
+// DISPLAY UTILITIES
+// ============================================================================
+
+// Hide on mobile
+.hide-mobile {
+  @media (max-width: 599px) {
+    display: none !important;
+  }
+}
+
+// Show only on mobile
+.show-mobile {
+  display: none !important;
+
+  @media (max-width: 599px) {
+    display: block !important;
+  }
+}
+
+// Hide on tablet
+.hide-tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    display: none !important;
+  }
+}
+
+// Show only on tablet
+.show-tablet {
+  display: none !important;
+
+  @media (min-width: 600px) and (max-width: 959px) {
+    display: block !important;
+  }
+}
+
+// Hide on desktop
+.hide-desktop {
+  @media (min-width: 960px) {
+    display: none !important;
+  }
+}
+
+// Show only on desktop
+.show-desktop {
+  display: none !important;
+
+  @media (min-width: 960px) {
+    display: block !important;
+  }
+}
+
+// ============================================================================
+// FLEX RESPONSIVE UTILITIES
+// ============================================================================
+
+// Flex direction responsive
+.flex-column-mobile {
+  @media (max-width: 599px) {
+    flex-direction: column;
+  }
+}
+
+.flex-row-tablet {
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+}
+
+// ============================================================================
+// GRID RESPONSIVE UTILITIES
+// ============================================================================
+
+// Grid columns responsive
+.grid-1-mobile {
+  @media (max-width: 599px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-2-tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grid-3-desktop {
+  @media (min-width: 960px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ============================================================================
+// WIDTH RESPONSIVE UTILITIES
+// ============================================================================
+
+// Full width on mobile
+.full-width-mobile {
+  @media (max-width: 599px) {
+    width: 100%;
+  }
+}
+
+// Full width on tablet
+.full-width-tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    width: 100%;
+  }
+}
+
+// ============================================================================
+// PADDING RESPONSIVE UTILITIES
+// ============================================================================
+
+// Responsive padding
+.px-mobile {
+  @media (max-width: 599px) {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+}
+
+.px-tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+}
+
+.px-desktop {
+  @media (min-width: 960px) {
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+  }
+}
+
+// ============================================================================
+// MARGIN RESPONSIVE UTILITIES
+// ============================================================================
+
+// Responsive margins
+.mx-mobile {
+  @media (max-width: 599px) {
+    margin-left: var(--spacing-sm);
+    margin-right: var(--spacing-sm);
+  }
+}
+
+.mx-tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    margin-left: var(--spacing-md);
+    margin-right: var(--spacing-md);
+  }
+}
+
+.mx-desktop {
+  @media (min-width: 960px) {
+    margin-left: var(--spacing-lg);
+    margin-right: var(--spacing-lg);
+  }
+}
+
+// ============================================================================
+// TEXT ALIGNMENT RESPONSIVE UTILITIES
+// ============================================================================
+
+// Responsive text alignment
+.text-center-mobile {
+  @media (max-width: 599px) {
+    text-align: center;
+  }
+}
+
+.text-left-tablet {
+  @media (min-width: 600px) {
+    text-align: left;
+  }
+}
+
+// ============================================================================
+// FONT SIZE RESPONSIVE UTILITIES
+// ============================================================================
+
+// Responsive font sizes
+.text-sm-mobile {
+  @media (max-width: 599px) {
+    font-size: var(--font-size-body-small);
+  }
+}
+
+.text-md-tablet {
+  @media (min-width: 600px) {
+    font-size: var(--font-size-body-medium);
+  }
+}
+
+.text-lg-desktop {
+  @media (min-width: 960px) {
+    font-size: var(--font-size-body-large);
+  }
+}
+
+// ============================================================================
+// ASPECT RATIO UTILITIES
+// ============================================================================
+
+// Responsive aspect ratios
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+// ============================================================================
+// CONTAINER QUERIES (if supported)
+// ============================================================================
+
+// Container query support for modern browsers
+@supports (container-type: inline-size) {
+  .container-responsive {
+    container-type: inline-size;
+  }
+
+  @container (max-width: 400px) {
+    .container-responsive-sm {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @container (min-width: 400px) and (max-width: 700px) {
+    .container-responsive-md {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @container (min-width: 700px) {
+    .container-responsive-lg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// ============================================================================
+// TOUCH-FRIENDLY UTILITIES
+// ============================================================================
+
+// Touch-friendly spacing on mobile
+.touch-spacing-mobile {
+  @media (max-width: 599px) {
+    padding: var(--spacing-md);
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+// ============================================================================
+// OVERFLOW UTILITIES
+// ============================================================================
+
+// Responsive overflow
+.overflow-auto-mobile {
+  @media (max-width: 599px) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+// ============================================================================
+// Z-INDEX RESPONSIVE UTILITIES
+// ============================================================================
+
+// Responsive z-index for stacking contexts
+.z-mobile {
+  @media (max-width: 599px) {
+    z-index: 10;
+  }
+}
+
+.z-tablet {
+  @media (min-width: 600px) and (max-width: 959px) {
+    z-index: 20;
+  }
+}
+
+.z-desktop {
+  @media (min-width: 960px) {
+    z-index: 30;
+  }
+}

@@ -1,0 +1,470 @@
+// ============================================================================
+// BUTTON COMPONENT STYLES
+// ============================================================================
+// This file defines all button variants, sizes, and states for the application
+// Applies to Material buttons and custom button elements
+
+// ============================================================================
+// BASE BUTTON STYLES
+// ============================================================================
+
+button,
+[mat-button],
+[mat-raised-button],
+[mat-stroked-button],
+[mat-flat-button],
+[mat-icon-button],
+[mat-fab],
+[mat-mini-fab] {
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-label-large);
+  font-weight: var(--font-weight-medium);
+  padding: 8px 16px;
+  min-height: 36px;
+  transition: all var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-family-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  user-select: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// ============================================================================
+// CONTAINED VARIANT (Primary Action)
+// ============================================================================
+
+[mat-raised-button],
+[mat-flat-button] {
+  &:not([color="accent"]):not([color="warn"]) {
+    background-color: var(--color-primary);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-dark);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--color-primary-dark);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      transform: scale(0.98);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary-dark);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      background-color: var(--color-neutral-300);
+      color: var(--color-neutral-500);
+    }
+  }
+
+  // Accent color variant
+  &[color="accent"] {
+    background-color: var(--color-secondary);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-secondary-dark);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--color-secondary-dark);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      background-color: var(--color-neutral-300);
+      color: var(--color-neutral-500);
+    }
+  }
+
+  // Warn color variant
+  &[color="warn"] {
+    background-color: var(--color-error);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: #E53935;
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+      background-color: #E53935;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      background-color: var(--color-neutral-300);
+      color: var(--color-neutral-500);
+    }
+  }
+}
+
+// ============================================================================
+// OUTLINED VARIANT (Secondary Action)
+// ============================================================================
+
+[mat-stroked-button] {
+  &:not([color="accent"]):not([color="warn"]) {
+    background-color: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.12);
+      transform: scale(0.98);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      border-color: var(--color-neutral-300);
+      color: var(--color-neutral-500);
+    }
+  }
+
+  // Accent color variant
+  &[color="accent"] {
+    background-color: transparent;
+    border: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(0, 188, 212, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(0, 188, 212, 0.12);
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      border-color: var(--color-neutral-300);
+      color: var(--color-neutral-500);
+    }
+  }
+
+  // Warn color variant
+  &[color="warn"] {
+    background-color: transparent;
+    border: 1px solid var(--color-error);
+    color: var(--color-error);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(244, 67, 54, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(244, 67, 54, 0.12);
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      border-color: var(--color-neutral-300);
+      color: var(--color-neutral-500);
+    }
+  }
+}
+
+// ============================================================================
+// TEXT VARIANT (Tertiary Action)
+// ============================================================================
+
+[mat-button] {
+  &:not([color="accent"]):not([color="warn"]) {
+    background-color: transparent;
+    color: var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.12);
+      transform: scale(0.98);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      color: var(--color-neutral-500);
+    }
+  }
+
+  // Accent color variant
+  &[color="accent"] {
+    background-color: transparent;
+    color: var(--color-secondary);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(0, 188, 212, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(0, 188, 212, 0.12);
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      color: var(--color-neutral-500);
+    }
+  }
+
+  // Warn color variant
+  &[color="warn"] {
+    background-color: transparent;
+    color: var(--color-error);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(244, 67, 54, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(244, 67, 54, 0.12);
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      color: var(--color-neutral-500);
+    }
+  }
+}
+
+// ============================================================================
+// SIZE VARIANTS
+// ============================================================================
+
+// Small size
+[mat-button].btn-small,
+[mat-raised-button].btn-small,
+[mat-stroked-button].btn-small,
+[mat-flat-button].btn-small {
+  padding: 4px 12px;
+  min-height: 32px;
+  font-size: var(--font-size-label-medium);
+}
+
+// Medium size (default)
+[mat-button].btn-medium,
+[mat-raised-button].btn-medium,
+[mat-stroked-button].btn-medium,
+[mat-flat-button].btn-medium {
+  padding: 8px 16px;
+  min-height: 36px;
+  font-size: var(--font-size-label-large);
+}
+
+// Large size
+[mat-button].btn-large,
+[mat-raised-button].btn-large,
+[mat-stroked-button].btn-large,
+[mat-flat-button].btn-large {
+  padding: 12px 20px;
+  min-height: 44px;
+  font-size: var(--font-size-label-large);
+}
+
+// ============================================================================
+// ICON BUTTON STYLES
+// ============================================================================
+
+[mat-icon-button] {
+  padding: var(--spacing-sm);
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: var(--border-radius-md);
+
+  &:not([color="accent"]):not([color="warn"]) {
+    color: var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(25, 118, 210, 0.12);
+    }
+  }
+
+  &[color="accent"] {
+    color: var(--color-secondary);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(0, 188, 212, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(0, 188, 212, 0.12);
+    }
+  }
+
+  &[color="warn"] {
+    color: var(--color-error);
+
+    &:hover:not(:disabled) {
+      background-color: rgba(244, 67, 54, 0.08);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba(244, 67, 54, 0.12);
+    }
+  }
+
+  &:disabled {
+    color: var(--color-neutral-500);
+  }
+}
+
+// ============================================================================
+// FAB BUTTON STYLES
+// ============================================================================
+
+[mat-fab],
+[mat-mini-fab] {
+  &:not([color="accent"]):not([color="warn"]) {
+    background-color: var(--color-primary);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-dark);
+      box-shadow: var(--shadow-lg);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--color-primary-dark);
+      transform: scale(0.95);
+    }
+  }
+
+  &[color="accent"] {
+    background-color: var(--color-secondary);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-secondary-dark);
+      box-shadow: var(--shadow-lg);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--color-secondary-dark);
+      transform: scale(0.95);
+    }
+  }
+
+  &[color="warn"] {
+    background-color: var(--color-error);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: #E53935;
+      box-shadow: var(--shadow-lg);
+    }
+
+    &:active:not(:disabled) {
+      background-color: #E53935;
+      transform: scale(0.95);
+    }
+  }
+}
+
+// ============================================================================
+// BUTTON GROUP STYLES
+// ============================================================================
+
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+
+  button {
+    flex: 0 1 auto;
+  }
+
+  &.button-group-vertical {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  &.button-group-full-width {
+    button {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+// ============================================================================
+// LOADING STATE
+// ============================================================================
+
+button:disabled,
+[mat-button]:disabled,
+[mat-raised-button]:disabled,
+[mat-stroked-button]:disabled,
+[mat-flat-button]:disabled,
+[mat-icon-button]:disabled,
+[mat-fab]:disabled,
+[mat-mini-fab]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 599px) {
+  // Touch-friendly button sizing on mobile
+  button,
+  [mat-button],
+  [mat-raised-button],
+  [mat-stroked-button],
+  [mat-flat-button] {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  [mat-icon-button] {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .button-group {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}

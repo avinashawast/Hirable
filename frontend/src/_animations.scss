@@ -1,0 +1,381 @@
+// ============================================================================
+// ANIMATIONS AND TRANSITIONS
+// ============================================================================
+// This file contains all animation keyframes and animation utility classes
+// for the design system. Animations use consistent timing and easing from
+// the theme variables.
+
+// ============================================================================
+// PAGE TRANSITION ANIMATIONS
+// ============================================================================
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutSlideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+// Page transition animation class
+.page-transition-enter {
+  animation: fadeInSlideUp var(--animation-duration-slow) var(--animation-easing-ease-out);
+}
+
+.page-transition-exit {
+  animation: fadeOutSlideDown var(--animation-duration-slow) var(--animation-easing-ease-in);
+}
+
+// ============================================================================
+// HOVER ANIMATIONS FOR INTERACTIVE ELEMENTS
+// ============================================================================
+
+@keyframes hoverLift {
+  from {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+  to {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes hoverColorShift {
+  from {
+    background-color: inherit;
+  }
+  to {
+    background-color: rgba(25, 118, 210, 0.08);
+  }
+}
+
+// Hover effect for cards and containers
+.hover-lift {
+  transition: box-shadow var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              transform var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+  }
+}
+
+// Hover effect for interactive elements
+.hover-highlight {
+  transition: background-color var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              color var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+
+  &:hover {
+    background-color: rgba(25, 118, 210, 0.08);
+  }
+}
+
+// ============================================================================
+// BUTTON PRESS ANIMATIONS
+// ============================================================================
+
+@keyframes buttonPress {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Button press animation class
+.button-press {
+  animation: buttonPress var(--animation-duration-fast) var(--animation-easing-ease-in-out);
+}
+
+// Smooth button state transitions
+.button-transition {
+  transition: background-color var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              color var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              border-color var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              box-shadow var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              transform var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ============================================================================
+// MODAL ENTRANCE ANIMATIONS
+// ============================================================================
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Modal backdrop animation
+.modal-backdrop-enter {
+  animation: modalFadeIn var(--animation-duration-slow) var(--animation-easing-ease-out);
+}
+
+// Modal content animation
+.modal-content-enter {
+  animation: modalScaleIn var(--animation-duration-slow) var(--animation-easing-ease-out);
+}
+
+// ============================================================================
+// LOADING SPINNER ANIMATIONS
+// ============================================================================
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Spinner animation class
+.spinner-rotate {
+  animation: spin 1s linear infinite;
+}
+
+// Pulse animation for loading states
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// ============================================================================
+// TRANSITION UTILITY CLASSES
+// ============================================================================
+
+// Fast transitions (150ms)
+.transition-fast {
+  transition: all var(--animation-duration-fast) var(--animation-easing-ease-in-out);
+}
+
+// Standard transitions (200ms)
+.transition-standard {
+  transition: all var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}
+
+// Slow transitions (300ms)
+.transition-slow {
+  transition: all var(--animation-duration-slow) var(--animation-easing-ease-in-out);
+}
+
+// Color-only transitions
+.transition-color {
+  transition: color var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              background-color var(--animation-duration-standard) var(--animation-easing-ease-in-out),
+              border-color var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}
+
+// Transform-only transitions
+.transition-transform {
+  transition: transform var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}
+
+// Shadow-only transitions
+.transition-shadow {
+  transition: box-shadow var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}
+
+// ============================================================================
+// ACCESSIBILITY: RESPECT PREFERS-REDUCED-MOTION
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// ============================================================================
+// FADE ANIMATIONS
+// ============================================================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing-ease-out);
+}
+
+.fade-out {
+  animation: fadeOut var(--animation-duration-standard) var(--animation-easing-ease-in);
+}
+
+// ============================================================================
+// SLIDE ANIMATIONS
+// ============================================================================
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft var(--animation-duration-standard) var(--animation-easing-ease-out);
+}
+
+.slide-out-left {
+  animation: slideOutLeft var(--animation-duration-standard) var(--animation-easing-ease-in);
+}
+
+.slide-in-right {
+  animation: slideInRight var(--animation-duration-standard) var(--animation-easing-ease-out);
+}
+
+.slide-out-right {
+  animation: slideOutRight var(--animation-duration-standard) var(--animation-easing-ease-in);
+}
+
+// ============================================================================
+// SCALE ANIMATIONS
+// ============================================================================
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.scale-in {
+  animation: scaleIn var(--animation-duration-standard) var(--animation-easing-ease-out);
+}
+
+.scale-out {
+  animation: scaleOut var(--animation-duration-standard) var(--animation-easing-ease-in);
+}
+
+// ============================================================================
+// BOUNCE ANIMATIONS
+// ============================================================================
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce {
+  animation: bounce var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}

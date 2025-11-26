@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { UserService, UserDTO, CreateUserRequest } from '../../services/user.service';
 
 @Component({
@@ -26,7 +27,8 @@ import { UserService, UserDTO, CreateUserRequest } from '../../services/user.ser
     MatChipsModule,
     MatIconModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule
   ],
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']

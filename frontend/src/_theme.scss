@@ -1,0 +1,359 @@
+// ============================================================================
+// Design System - Theme Variables and CSS Custom Properties
+// ============================================================================
+
+// ============================================================================
+// COLOR PALETTE
+// ============================================================================
+
+// Primary Colors
+$color-primary: #1976D2;
+$color-primary-dark: #1565C0;
+$color-primary-light: #42A5F5;
+
+// Secondary Colors
+$color-secondary: #00BCD4;
+$color-secondary-dark: #0097A7;
+$color-secondary-light: #4DD0E1;
+
+// Neutral Colors (Gray Scale)
+$color-neutral-50: #FAFAFA;
+$color-neutral-100: #F5F5F5;
+$color-neutral-200: #EEEEEE;
+$color-neutral-300: #E0E0E0;
+$color-neutral-400: #BDBDBD;
+$color-neutral-500: #9E9E9E;
+$color-neutral-600: #757575;
+$color-neutral-700: #616161;
+$color-neutral-800: #424242;
+$color-neutral-900: #212121;
+
+// Semantic Colors
+$color-success: #4CAF50;
+$color-warning: #FF9800;
+$color-error: #F44336;
+$color-info: #2196F3;
+
+// ============================================================================
+// TYPOGRAPHY
+// ============================================================================
+
+// Font Families
+$font-family-primary: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+$font-family-monospace: 'Courier New', monospace;
+
+// Font Sizes
+$font-size-display-large: 32px;
+$font-size-display-medium: 28px;
+$font-size-headline-large: 24px;
+$font-size-headline-medium: 20px;
+$font-size-title-large: 18px;
+$font-size-title-medium: 16px;
+$font-size-body-large: 16px;
+$font-size-body-medium: 14px;
+$font-size-body-small: 12px;
+$font-size-label-large: 14px;
+$font-size-label-medium: 12px;
+$font-size-label-small: 11px;
+
+// Line Heights
+$line-height-display-large: 40px;
+$line-height-display-medium: 36px;
+$line-height-headline-large: 32px;
+$line-height-headline-medium: 28px;
+$line-height-title-large: 26px;
+$line-height-title-medium: 24px;
+$line-height-body-large: 24px;
+$line-height-body-medium: 20px;
+$line-height-body-small: 16px;
+$line-height-label-large: 20px;
+$line-height-label-medium: 16px;
+$line-height-label-small: 16px;
+
+// Font Weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// ============================================================================
+// SPACING SYSTEM (8px Base Unit)
+// ============================================================================
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+$spacing-3xl: 64px;
+
+// ============================================================================
+// SHADOWS
+// ============================================================================
+
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+$shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.25);
+
+// ============================================================================
+// BORDER RADIUS
+// ============================================================================
+
+$border-radius-sm: 2px;
+$border-radius-md: 4px;
+$border-radius-lg: 8px;
+$border-radius-xl: 12px;
+$border-radius-full: 50%;
+
+// ============================================================================
+// ANIMATION TIMING AND EASING
+// ============================================================================
+
+// Timing Durations
+$animation-duration-fast: 150ms;
+$animation-duration-standard: 200ms;
+$animation-duration-slow: 300ms;
+
+// Easing Functions
+$animation-easing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$animation-easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+$animation-easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+// ============================================================================
+// RESPONSIVE BREAKPOINTS
+// ============================================================================
+
+$breakpoint-mobile: 0px;
+$breakpoint-mobile-max: 599px;
+$breakpoint-tablet: 600px;
+$breakpoint-tablet-max: 959px;
+$breakpoint-desktop: 960px;
+
+// ============================================================================
+// CSS CUSTOM PROPERTIES (CSS Variables)
+// ============================================================================
+
+:root {
+  // Primary Colors
+  --color-primary: #{$color-primary};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-light: #{$color-primary-light};
+
+  // Secondary Colors
+  --color-secondary: #{$color-secondary};
+  --color-secondary-dark: #{$color-secondary-dark};
+  --color-secondary-light: #{$color-secondary-light};
+
+  // Neutral Colors
+  --color-neutral-50: #{$color-neutral-50};
+  --color-neutral-100: #{$color-neutral-100};
+  --color-neutral-200: #{$color-neutral-200};
+  --color-neutral-300: #{$color-neutral-300};
+  --color-neutral-400: #{$color-neutral-400};
+  --color-neutral-500: #{$color-neutral-500};
+  --color-neutral-600: #{$color-neutral-600};
+  --color-neutral-700: #{$color-neutral-700};
+  --color-neutral-800: #{$color-neutral-800};
+  --color-neutral-900: #{$color-neutral-900};
+
+  // Semantic Colors
+  --color-success: #{$color-success};
+  --color-warning: #{$color-warning};
+  --color-error: #{$color-error};
+  --color-info: #{$color-info};
+
+  // Typography
+  --font-family-primary: #{$font-family-primary};
+  --font-family-monospace: #{$font-family-monospace};
+
+  // Font Sizes
+  --font-size-display-large: #{$font-size-display-large};
+  --font-size-display-medium: #{$font-size-display-medium};
+  --font-size-headline-large: #{$font-size-headline-large};
+  --font-size-headline-medium: #{$font-size-headline-medium};
+  --font-size-title-large: #{$font-size-title-large};
+  --font-size-title-medium: #{$font-size-title-medium};
+  --font-size-body-large: #{$font-size-body-large};
+  --font-size-body-medium: #{$font-size-body-medium};
+  --font-size-body-small: #{$font-size-body-small};
+  --font-size-label-large: #{$font-size-label-large};
+  --font-size-label-medium: #{$font-size-label-medium};
+  --font-size-label-small: #{$font-size-label-small};
+
+  // Line Heights
+  --line-height-display-large: #{$line-height-display-large};
+  --line-height-display-medium: #{$line-height-display-medium};
+  --line-height-headline-large: #{$line-height-headline-large};
+  --line-height-headline-medium: #{$line-height-headline-medium};
+  --line-height-title-large: #{$line-height-title-large};
+  --line-height-title-medium: #{$line-height-title-medium};
+  --line-height-body-large: #{$line-height-body-large};
+  --line-height-body-medium: #{$line-height-body-medium};
+  --line-height-body-small: #{$line-height-body-small};
+  --line-height-label-large: #{$line-height-label-large};
+  --line-height-label-medium: #{$line-height-label-medium};
+  --line-height-label-small: #{$line-height-label-small};
+
+  // Font Weights
+  --font-weight-regular: #{$font-weight-regular};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+
+  // Spacing
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-2xl: #{$spacing-2xl};
+  --spacing-3xl: #{$spacing-3xl};
+
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+
+  // Border Radius
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+  --border-radius-xl: #{$border-radius-xl};
+  --border-radius-full: #{$border-radius-full};
+
+  // Animation Timing
+  --animation-duration-fast: #{$animation-duration-fast};
+  --animation-duration-standard: #{$animation-duration-standard};
+  --animation-duration-slow: #{$animation-duration-slow};
+
+  // Animation Easing
+  --animation-easing-ease-in-out: #{$animation-easing-ease-in-out};
+  --animation-easing-ease-out: #{$animation-easing-ease-out};
+  --animation-easing-ease-in: #{$animation-easing-ease-in};
+}
+
+// ============================================================================
+// TYPOGRAPHY MIXINS
+// ============================================================================
+
+@mixin typography-display-large {
+  font-size: $font-size-display-large;
+  line-height: $line-height-display-large;
+  font-weight: $font-weight-regular;
+}
+
+@mixin typography-display-medium {
+  font-size: $font-size-display-medium;
+  line-height: $line-height-display-medium;
+  font-weight: $font-weight-regular;
+}
+
+@mixin typography-headline-large {
+  font-size: $font-size-headline-large;
+  line-height: $line-height-headline-large;
+  font-weight: $font-weight-regular;
+}
+
+@mixin typography-headline-medium {
+  font-size: $font-size-headline-medium;
+  line-height: $line-height-headline-medium;
+  font-weight: $font-weight-regular;
+}
+
+@mixin typography-title-large {
+  font-size: $font-size-title-large;
+  line-height: $line-height-title-large;
+  font-weight: $font-weight-medium;
+}
+
+@mixin typography-title-medium {
+  font-size: $font-size-title-medium;
+  line-height: $line-height-title-medium;
+  font-weight: $font-weight-medium;
+}
+
+@mixin typography-body-large {
+  font-size: $font-size-body-large;
+  line-height: $line-height-body-large;
+  font-weight: $font-weight-regular;
+}
+
+@mixin typography-body-medium {
+  font-size: $font-size-body-medium;
+  line-height: $line-height-body-medium;
+  font-weight: $font-weight-regular;
+}
+
+@mixin typography-body-small {
+  font-size: $font-size-body-small;
+  line-height: $line-height-body-small;
+  font-weight: $font-weight-regular;
+}
+
+@mixin typography-label-large {
+  font-size: $font-size-label-large;
+  line-height: $line-height-label-large;
+  font-weight: $font-weight-medium;
+}
+
+@mixin typography-label-medium {
+  font-size: $font-size-label-medium;
+  line-height: $line-height-label-medium;
+  font-weight: $font-weight-medium;
+}
+
+@mixin typography-label-small {
+  font-size: $font-size-label-small;
+  line-height: $line-height-label-small;
+  font-weight: $font-weight-medium;
+}
+
+// ============================================================================
+// UTILITY MIXINS
+// ============================================================================
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: $animation-duration-standard, $easing: $animation-easing-ease-in-out) {
+  transition: $property $duration $easing;
+}
+
+@mixin focus-ring($color: $color-primary) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}
+
+// ============================================================================
+// RESPONSIVE MIXINS
+// ============================================================================
+
+@mixin mobile-only {
+  @media (max-width: $breakpoint-mobile-max) {
+    @content;
+  }
+}
+
+@mixin tablet-and-up {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-tablet-max) {
+    @content;
+  }
+}
+
+@mixin desktop-and-up {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}

@@ -52,9 +52,9 @@ import { AuthService } from '../../services/auth.service';
           </form>
           <div class="demo-credentials">
             <p><strong>Demo Credentials:</strong></p>
-            <p>Admin: admin@hirable.com / admin123</p>
-            <p>Recruiter: recruiter@techcorp.com / recruiter123</p>
-            <p>Job Seeker: jobseeker@email.com / jobseeker123</p>
+            <p>Admin: admin&#64;hirable.com / admin123</p>
+            <p>Recruiter: recruiter&#64;techcorp.com / recruiter123</p>
+            <p>Job Seeker: jobseeker&#64;email.com / jobseeker123</p>
           </div>
         </mat-card-content>
       </mat-card>

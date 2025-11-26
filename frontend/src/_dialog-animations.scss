@@ -1,0 +1,40 @@
+// ============================================================================
+// MATERIAL DIALOG ANIMATIONS
+// ============================================================================
+// This file adds entrance animations to Material Dialog components
+
+// Animate the dialog backdrop (overlay)
+.cdk-overlay-backdrop {
+  animation: modalFadeIn var(--animation-duration-slow) var(--animation-easing-ease-out);
+}
+
+// Animate the dialog container
+.mat-mdc-dialog-container {
+  animation: modalScaleIn var(--animation-duration-slow) var(--animation-easing-ease-out);
+}
+
+// Ensure smooth transitions for dialog state changes
+.mat-mdc-dialog-container {
+  transition: opacity var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}
+
+// Animate dialog content
+.mat-mdc-dialog-content {
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing-ease-out);
+}
+
+// Animate dialog actions
+.mat-mdc-dialog-actions {
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing-ease-out);
+  animation-delay: 50ms;
+}
+
+// Respect prefers-reduced-motion for dialogs
+@media (prefers-reduced-motion: reduce) {
+  .cdk-overlay-backdrop,
+  .mat-mdc-dialog-container,
+  .mat-mdc-dialog-content,
+  .mat-mdc-dialog-actions {
+    animation: none;
+  }
+}

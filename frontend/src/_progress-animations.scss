@@ -1,0 +1,39 @@
+// ============================================================================
+// MATERIAL PROGRESS BAR ANIMATIONS
+// ============================================================================
+// This file adds animations to Material Progress Bar components
+
+// Animate progress bar entrance
+.mat-mdc-progress-bar {
+  animation: fadeIn var(--animation-duration-standard) var(--animation-easing-ease-out);
+}
+
+// Smooth progress bar transitions
+.mat-mdc-progress-bar-buffer {
+  transition: background-color var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+}
+
+// Animate progress bar fill
+.mat-mdc-progress-bar-fill::after {
+  animation: progressFill 2s ease-in-out infinite;
+}
+
+@keyframes progressFill {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+// Respect prefers-reduced-motion for progress bars
+@media (prefers-reduced-motion: reduce) {
+  .mat-mdc-progress-bar,
+  .mat-mdc-progress-bar-fill::after {
+    animation: none;
+  }
+}

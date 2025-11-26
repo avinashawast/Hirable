@@ -7,7 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   standalone: true,
   imports: [CommonModule, MatProgressSpinnerModule],
   template: `
-    <div class="spinner-container" *ngIf="isLoading">
+    <div class="spinner-container fade-in" *ngIf="isLoading">
       <mat-spinner [diameter]="diameter"></mat-spinner>
       <p *ngIf="message" class="spinner-message">{{ message }}</p>
     </div>
@@ -20,12 +20,22 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       justify-content: center;
       padding: 40px;
       gap: 16px;
+      animation: fadeIn var(--animation-duration-standard) var(--animation-easing-ease-out);
     }
 
     .spinner-message {
       margin: 0;
       color: #666;
       font-size: 14px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   `]
 })

@@ -1,0 +1,473 @@
+// ============================================================================
+// CARD COMPONENT STYLES
+// ============================================================================
+// This file defines card component styles with modern shadows, rounded corners,
+// and variants (elevated, outlined, filled) for consistent styling across the app
+
+// ============================================================================
+// BASE CARD STYLES
+// ============================================================================
+
+mat-card,
+.card {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  transition: all var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+  display: flex;
+  flex-direction: column;
+
+  // Remove default Material card padding to use our design system
+  &.mat-mdc-card {
+    padding: var(--spacing-md);
+  }
+}
+
+// ============================================================================
+// CARD HEADER STYLES
+// ============================================================================
+
+mat-card-header,
+.card-header {
+  display: flex;
+  flex-direction: column;
+  margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-md) calc(-1 * var(--spacing-md));
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-neutral-200);
+
+  mat-card-title,
+  .card-title {
+    @include typography-title-large;
+    color: var(--color-neutral-900);
+    margin: 0;
+    padding: 0;
+  }
+
+  mat-card-subtitle,
+  .card-subtitle {
+    @include typography-body-medium;
+    color: var(--color-neutral-600);
+    margin: var(--spacing-sm) 0 0 0;
+    padding: 0;
+  }
+}
+
+// ============================================================================
+// CARD CONTENT STYLES
+// ============================================================================
+
+mat-card-content,
+.card-content {
+  padding: var(--spacing-md) 0;
+  flex-grow: 1;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  // Ensure proper spacing for nested elements
+  > * + * {
+    margin-top: var(--spacing-md);
+  }
+}
+
+// ============================================================================
+// CARD ACTIONS STYLES
+// ============================================================================
+
+mat-card-actions,
+.card-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md));
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--color-neutral-200);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  button {
+    flex: 0 1 auto;
+  }
+
+  &.card-actions-full-width {
+    button {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+// ============================================================================
+// CARD VARIANTS
+// ============================================================================
+
+// Elevated Variant (Default)
+mat-card.card-elevated,
+.card.card-elevated {
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  border: none;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+// Outlined Variant
+mat-card.card-outlined,
+.card.card-outlined {
+  background-color: white;
+  border: 1px solid var(--color-neutral-200);
+  box-shadow: none;
+
+  &:hover {
+    border-color: var(--color-neutral-300);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:active {
+    border-color: var(--color-neutral-200);
+    box-shadow: none;
+  }
+}
+
+// Filled Variant
+mat-card.card-filled,
+.card.card-filled {
+  background-color: var(--color-neutral-50);
+  border: none;
+  box-shadow: none;
+
+  &:hover {
+    background-color: var(--color-neutral-100);
+  }
+
+  &:active {
+    background-color: var(--color-neutral-50);
+  }
+}
+
+// ============================================================================
+// INTERACTIVE CARD STYLES
+// ============================================================================
+
+// Clickable/Interactive Cards
+mat-card.card-interactive,
+.card.card-interactive {
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// ============================================================================
+// CARD SIZING VARIANTS
+// ============================================================================
+
+// Compact Card
+mat-card.card-compact,
+.card.card-compact {
+  padding: var(--spacing-sm);
+
+  mat-card-header,
+  .card-header {
+    margin: calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm)) var(--spacing-sm) calc(-1 * var(--spacing-sm));
+    padding: var(--spacing-sm);
+  }
+
+  mat-card-content,
+  .card-content {
+    padding: var(--spacing-sm) 0;
+  }
+
+  mat-card-actions,
+  .card-actions {
+    margin: var(--spacing-sm) calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm));
+    padding: var(--spacing-sm);
+  }
+}
+
+// Large Card
+mat-card.card-large,
+.card.card-large {
+  padding: var(--spacing-lg);
+
+  mat-card-header,
+  .card-header {
+    margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-lg) calc(-1 * var(--spacing-lg));
+    padding: var(--spacing-lg);
+  }
+
+  mat-card-content,
+  .card-content {
+    padding: var(--spacing-lg) 0;
+  }
+
+  mat-card-actions,
+  .card-actions {
+    margin: var(--spacing-lg) calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg));
+    padding: var(--spacing-lg);
+  }
+}
+
+// ============================================================================
+// CARD LAYOUT UTILITIES
+// ============================================================================
+
+// Horizontal Card Layout
+mat-card.card-horizontal,
+.card.card-horizontal {
+  flex-direction: row;
+  align-items: stretch;
+
+  mat-card-header,
+  .card-header {
+    flex: 0 0 auto;
+    border-right: 1px solid var(--color-neutral-200);
+    border-bottom: none;
+    margin: 0;
+    padding: var(--spacing-md);
+  }
+
+  mat-card-content,
+  .card-content {
+    flex: 1 1 auto;
+    padding: var(--spacing-md);
+  }
+}
+
+// ============================================================================
+// CARD GRID LAYOUT
+// ============================================================================
+
+.card-grid {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+  &.card-grid-2 {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+
+  &.card-grid-3 {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+
+  &.card-grid-4 {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+// ============================================================================
+// CARD CONTAINER STYLES
+// ============================================================================
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+
+  mat-card,
+  .card {
+    margin-bottom: 0;
+  }
+}
+
+// ============================================================================
+// CARD WITH IMAGES
+// ============================================================================
+
+mat-card.card-with-image,
+.card.card-with-image {
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-md) calc(-1 * var(--spacing-md));
+  }
+}
+
+// ============================================================================
+// CARD STATES
+// ============================================================================
+
+// Disabled Card
+mat-card.card-disabled,
+.card.card-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// Loading Card
+mat-card.card-loading,
+.card.card-loading {
+  position: relative;
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: 599px) {
+  // Mobile: Stack cards vertically with full width
+  .card-grid,
+  .card-grid-2,
+  .card-grid-3,
+  .card-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  // Reduce padding on mobile
+  mat-card,
+  .card {
+    padding: var(--spacing-sm);
+
+    mat-card-header,
+    .card-header {
+      margin: calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm)) var(--spacing-sm) calc(-1 * var(--spacing-sm));
+      padding: var(--spacing-sm);
+    }
+
+    mat-card-content,
+    .card-content {
+      padding: var(--spacing-sm) 0;
+    }
+
+    mat-card-actions,
+    .card-actions {
+      margin: var(--spacing-sm) calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm)) calc(-1 * var(--spacing-sm));
+      padding: var(--spacing-sm);
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  // Horizontal cards stack on mobile
+  mat-card.card-horizontal,
+  .card.card-horizontal {
+    flex-direction: column;
+
+    mat-card-header,
+    .card-header {
+      border-right: none;
+      border-bottom: 1px solid var(--color-neutral-200);
+    }
+  }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+  // Tablet: Adjust grid for tablet screens
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  // Desktop: Full grid layouts
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// ============================================================================
+// ACCESSIBILITY
+// ============================================================================
+
+// Focus visible for keyboard navigation
+mat-card:focus-visible,
+.card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  mat-card,
+  .card {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  mat-card.card-interactive,
+  .card.card-interactive {
+    &:hover {
+      transform: none;
+    }
+  }
+}

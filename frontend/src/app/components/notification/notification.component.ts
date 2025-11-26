@@ -1,4 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
 import { NotificationService, NotificationDTO } from '../../services/notification.service';
 import { AuthService } from '../../services/auth.service';
 import { Subject, interval } from 'rxjs';
@@ -6,6 +10,8 @@ import { takeUntil, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notification',
+  standalone: true,
+  imports: [CommonModule, MatIconModule, MatBadgeModule, MatButtonModule],
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css']
 })

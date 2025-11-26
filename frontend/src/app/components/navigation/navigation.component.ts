@@ -6,8 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 
@@ -29,26 +29,26 @@ interface NavItem {
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    MatListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDividerModule
   ],
   template: `
-    <mat-toolbar color="primary" class="navbar">
+    <header class="navbar">
       <button 
-        mat-icon-button 
+        class="menu-button"
         (click)="sidenav.toggle()"
-        class="menu-button">
+        aria-label="Toggle navigation menu">
         <mat-icon>menu</mat-icon>
       </button>
       
       <span class="spacer"></span>
-      <span class="app-title">Hirable</span>
+      <h1 class="app-title">Hirable</h1>
       <span class="spacer"></span>
 
       <button 
-        mat-icon-button 
+        class="user-menu-button"
         [matMenuTriggerFor]="userMenu"
-        class="user-menu-button">
+        aria-label="User menu">
         <mat-icon>account_circle</mat-icon>
       </button>
 
@@ -66,24 +66,25 @@ interface NavItem {
           <span>Logout</span>
         </button>
       </mat-menu>
-    </mat-toolbar>
+    </header>
 
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav 
         #sidenav 
-        mode="side" 
-        [opened]="isDesktop$ | async"
+        [mode]="(isDesktop$ | async) ? 'side' : 'over'"
+        [opened]="(isDesktop$ | async) ? true : false"
         class="sidenav">
-        <mat-nav-list>
-          <mat-list-item 
+        <nav class="nav-list" role="navigation" aria-label="Main navigation">
+          <a 
             *ngFor="let item of navItems"
             [routerLink]="item.route"
             routerLinkActive="active"
+            class="nav-item"
             (click)="closeSidenavOnMobile()">
-            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-            <span matListItemTitle>{{ item.label }}</span>
-          </mat-list-item>
-        </mat-nav-list>
+            <mat-icon class="nav-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+            <span class="nav-label">{{ item.label }}</span>
+          </a>
+        </nav>
       </mat-sidenav>
 
       <mat-sidenav-content class="content">
@@ -93,19 +94,44 @@ interface NavItem {
   `,
   styles: [`
     .navbar {
+      display: flex;
+      align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      height: 64px;
+      background-color: var(--color-primary);
+      color: white;
+      box-shadow: var(--shadow-sm);
+      padding: 0 var(--spacing-md);
     }
 
     .menu-button {
-      margin-right: 16px;
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: var(--spacing-sm);
+      margin-right: var(--spacing-md);
+      border-radius: var(--border-radius-md);
+      transition: background-color var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+    }
+
+    .menu-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-button:focus {
+      outline: 2px solid white;
+      outline-offset: 2px;
     }
 
     .app-title {
-      font-size: 20px;
-      font-weight: 500;
+      font-size: var(--font-size-title-large);
+      font-weight: var(--font-weight-semibold);
+      margin: 0;
+      white-space: nowrap;
     }
 
     .spacer {
@@ -113,7 +139,26 @@ interface NavItem {
     }
 
     .user-menu-button {
-      margin-left: 16px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: var(--spacing-sm);
+      margin-left: var(--spacing-md);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+    }
+
+    .user-menu-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .user-menu-button:focus {
+      outline: 2px solid white;
+      outline-offset: 2px;
     }
 
     .sidenav-container {
@@ -121,49 +166,103 @@ interface NavItem {
     }
 
     .sidenav {
-      width: 250px;
-      border-right: 1px solid #e0e0e0;
+      width: 280px;
+      background-color: var(--color-neutral-50);
+      border-right: 1px solid var(--color-neutral-200);
     }
 
     .content {
-      padding: 20px;
+      padding: var(--spacing-lg);
       overflow-y: auto;
+      background-color: white;
     }
 
-    mat-nav-list {
-      padding-top: 0;
+    .nav-list {
+      padding: var(--spacing-md) 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
     }
 
-    mat-list-item {
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 12px var(--spacing-md);
+      margin: 0 var(--spacing-sm);
       cursor: pointer;
       border-left: 4px solid transparent;
-      transition: all 0.3s ease;
+      border-radius: var(--border-radius-md);
+      transition: all var(--animation-duration-standard) var(--animation-easing-ease-in-out);
+      text-decoration: none;
+      color: var(--color-neutral-700);
+      font-size: var(--font-size-body-medium);
+      font-weight: var(--font-weight-medium);
     }
 
-    mat-list-item.active {
-      background-color: rgba(63, 81, 181, 0.08);
-      border-left-color: #3f51b5;
+    .nav-item:hover {
+      background-color: var(--color-neutral-100);
+      color: var(--color-primary);
     }
 
-    mat-list-item:hover {
-      background-color: rgba(0, 0, 0, 0.04);
+    .nav-item.active {
+      background-color: rgba(25, 118, 210, 0.08);
+      border-left-color: var(--color-primary);
+      color: var(--color-primary);
     }
 
-    @media (max-width: 768px) {
+    .nav-icon {
+      margin-right: var(--spacing-md);
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    @media (max-width: 599px) {
+      .navbar {
+        height: 56px;
+        padding: 0 var(--spacing-sm);
+      }
+
+      .menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .app-title {
+        font-size: var(--font-size-title-medium);
+      }
+
       .sidenav-container {
         height: calc(100vh - 56px);
       }
 
-      .navbar {
-        height: 56px;
-      }
-
-      .app-title {
-        font-size: 18px;
+      .sidenav {
+        width: 256px;
       }
 
       .content {
-        padding: 16px;
+        padding: var(--spacing-md);
+      }
+    }
+
+    @media (max-width: 959px) {
+      .menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   `]
@@ -179,7 +278,8 @@ export class NavigationComponent implements OnInit {
   ) {
     this.isDesktop$ = new Observable((observer: any) => {
       const checkWidth = () => {
-        observer.next(window.innerWidth > 768);
+        // Desktop breakpoint is 960px according to design system
+        observer.next(window.innerWidth >= 960);
       };
       checkWidth();
       window.addEventListener('resize', checkWidth);
@@ -241,7 +341,7 @@ export class NavigationComponent implements OnInit {
   }
 
   closeSidenavOnMobile(): void {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth < 960) {
       const sidenav = document.querySelector('mat-sidenav');
       if (sidenav) {
         (sidenav as any).close();

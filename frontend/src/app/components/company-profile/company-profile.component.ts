@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RecruiterService, RecruiterProfileDTO } from '../../services/recruiter.service';
 import { AuthService } from '../../services/auth.service';
 import { TaxonomyService, TaxonomyDTO } from '../../services/taxonomy.service';
@@ -20,7 +21,8 @@ import { TaxonomyService, TaxonomyDTO } from '../../services/taxonomy.service';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './company-profile.component.html',
   styleUrls: ['./company-profile.component.css']
@@ -37,7 +39,7 @@ export class CompanyProfileComponent implements OnInit {
   };
 
   loading = false;
-  recruiterId: number;
+  recruiterId: number = 0;
   industries: TaxonomyDTO[] = [];
 
   constructor(
@@ -48,7 +50,7 @@ export class CompanyProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.recruiterId = this.authService.getUserId();
+    this.recruiterId = this.authService.getUserId() || 0;
     this.loadIndustries();
     this.loadProfile();
   }
