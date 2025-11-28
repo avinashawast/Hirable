@@ -36,10 +36,9 @@ export class JobSeekerDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const userStr = localStorage.getItem('user');
-    if (userStr) {
-      const user = JSON.parse(userStr);
-      this.jobSeekerId = user.id;
+    const userIdStr = localStorage.getItem('user_id');
+    if (userIdStr) {
+      this.jobSeekerId = parseInt(userIdStr, 10);
       this.loadApplications();
     } else {
       this.router.navigate(['/login']);

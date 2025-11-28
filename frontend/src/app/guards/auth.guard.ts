@@ -19,8 +19,6 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // Ensure the authentication state is updated before navigating
-    this.authService.logout();
     this.router.navigate(['/login']);
     return false;
   }

@@ -1,39 +1,46 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import {
   HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse
+  HttpHandlerFn,
+  HttpEvent
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+export function authInterceptor(request: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = this.authService.getToken();
+  console.log('authInterceptor: Processing request:', request.url);
+  const token = authService.getToken();
+  console.log('authInterceptor: Token from service:', token ? 'Present' : 'Missing');
+  console.log('authInterceptor: Token value:', token);
 
-    if (token) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    }
-
-    return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.authService.logout();
-          this.router.navigate(['/login']);
-        }
-        return throwError(() => error);
-      })
-    );
+  if (token) {
+    console.log('authInterceptor: Adding JWT token to request:', request.url);
+    request = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log('authInterceptor: Request headers after clone:', request.headers.get('Authorization'));
+  } else {
+    console.warn('authInterceptor: No JWT token found for request:', request.url);
   }
+
+  return next(request).pipe(
+    catchError((error: any) => {
+      console.error('authInterceptor: HTTP Error:', error.status, error.message);
+      if (error.status === 401) {
+        // Only logout if not already on login page
+        if (router.url !== '/login') {
+          authService.logout();
+          router.navigate(['/login']);
+        }
+      }
+      return throwError(() => error);
+    })
+  );
 }

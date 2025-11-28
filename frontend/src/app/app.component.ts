@@ -11,12 +11,12 @@ import { filter } from 'rxjs/operators';
   imports: [CommonModule, RouterOutlet, NavigationComponent],
   template: `
     <div class="app-container">
-      <app-navigation *ngIf="isAuthenticated">
+      <app-navigation *ngIf="shouldShowNavigation()">
         <div class="router-outlet-wrapper page-transition-enter">
           <router-outlet></router-outlet>
         </div>
       </app-navigation>
-      <div class="router-outlet-wrapper page-transition-enter" *ngIf="!isAuthenticated">
+      <div class="router-outlet-wrapper page-transition-enter" *ngIf="!shouldShowNavigation()">
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -51,5 +51,14 @@ export class AppComponent implements OnInit {
       .subscribe(() => {
         // Animation is applied via CSS class
       });
+  }
+
+  shouldShowNavigation(): boolean {
+    // Don't show navigation on login page
+    if (this.router.url === '/login') {
+      return false;
+    }
+    // Show navigation only if authenticated
+    return this.isAuthenticated;
   }
 }

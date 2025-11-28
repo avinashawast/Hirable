@@ -33,10 +33,12 @@ export class AuthService {
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap((response: LoginResponse) => {
+        console.log('AuthService.login: Received response:', response);
         this.storeToken(response.token);
         this.storeRole(response.role);
         this.storeUserId(response.userId);
         this.storeUsername(response.username);
+        console.log('AuthService.login: Token stored:', this.getToken());
         this.isAuthenticatedSubject.next(true);
       })
     );
@@ -51,7 +53,9 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    const token = localStorage.getItem(this.tokenKey);
+    console.log('AuthService.getToken() called, token:', token ? 'Present' : 'Missing');
+    return token;
   }
 
   getRole(): string | null {
