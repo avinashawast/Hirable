@@ -33,9 +33,9 @@ public class AnalyticsService {
         long totalAdmins = userRepository.findByRole(UserRole.ADMIN).size();
 
         long totalJobs = jobRepository.count();
-        long approvedJobs = jobRepository.findByStatus(JobStatus.APPROVED).size();
-        long pendingJobs = jobRepository.findByStatus(JobStatus.PENDING).size();
-        long rejectedJobs = jobRepository.findByStatus(JobStatus.REJECTED).size();
+        long approvedJobs = jobRepository.findByStatus(JobStatus.APPROVED.name()).size();
+        long pendingJobs = jobRepository.findByStatus(JobStatus.PENDING.name()).size();
+        long rejectedJobs = jobRepository.findByStatus(JobStatus.REJECTED.name()).size();
 
         long totalApplications = applicationRepository.count();
         long totalChats = chatRepository.count();
@@ -66,8 +66,8 @@ public class AnalyticsService {
 
     private AnalyticsDTO.RecruiterActivityDTO getRecruiterActivity() {
         long totalJobsPosted = jobRepository.count();
-        long jobsApproved = jobRepository.findByStatus(JobStatus.APPROVED).size();
-        long jobsRejected = jobRepository.findByStatus(JobStatus.REJECTED).size();
+        long jobsApproved = jobRepository.findByStatus(JobStatus.APPROVED.name()).size();
+        long jobsRejected = jobRepository.findByStatus(JobStatus.REJECTED.name()).size();
         long candidatesContacted = chatRepository.count();
 
         return AnalyticsDTO.RecruiterActivityDTO.builder()

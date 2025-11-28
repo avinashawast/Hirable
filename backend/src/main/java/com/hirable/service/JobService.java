@@ -78,7 +78,7 @@ public class JobService {
     }
 
     public List<JobDTO> getPendingJobs() {
-        List<Job> jobs = jobRepository.findByStatus(JobStatus.PENDING);
+        List<Job> jobs = jobRepository.findByStatus(JobStatus.PENDING.name());
         return jobs.stream().map(this::mapToDTO).toList();
     }
 
@@ -131,7 +131,7 @@ public class JobService {
     public List<JobDTO> getJobsByStatus(String status) {
         try {
             JobStatus jobStatus = JobStatus.valueOf(status.toUpperCase());
-            List<Job> jobs = jobRepository.findByStatus(jobStatus);
+            List<Job> jobs = jobRepository.findByStatus(jobStatus.name());
             return jobs.stream().map(this::mapToDTO).toList();
         } catch (IllegalArgumentException e) {
             return List.of();

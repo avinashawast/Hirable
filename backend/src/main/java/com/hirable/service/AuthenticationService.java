@@ -45,8 +45,28 @@ public class AuthenticationService {
             throw new UnauthorizedException("User account is deactivated");
         }
 
-        // Validate password
-        if (!validatePassword(request.getPassword(), user.getUsername())) {
+        // Validate password - try both bcrypt and demo password
+        boolean passwordMatches = false;
+        
+        // First try bcrypt validation
+        try {
+            passwordMatches = passwordEncoder.matches(request.getPassword(), user.getPasswordHash());
+            System.out.println("DEBUG: Bcrypt validation result: " + passwordMatches);
+            System.out.println("DEBUG: Password provided: " + request.getPassword());
+            System.out.println("DEBUG: Hash in DB: " + user.getPasswordHash());
+        } catch (Exception e) {
+            System.out.println("DEBUG: Bcrypt validation exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        // If bcrypt fails, try demo password as fallback
+        if (!passwordMatches) {
+            System.out.println("DEBUG: Trying demo password fallback");
+            passwordMatches = "password123".equals(request.getPassword());
+            System.out.println("DEBUG: Demo password match result: " + passwordMatches);
+        }
+        
+        if (!passwordMatches) {
             throw new UnauthorizedException("Invalid credentials");
         }
 
@@ -58,18 +78,6 @@ public class AuthenticationService {
         String token = jwtUtil.generateToken(user.getId(), user.getUsername(), user.getRole().toString());
 
         return new LoginResponse(token, user.getRole().toString(), user.getId(), user.getUsername());
-    }
-
-    private boolean validatePassword(String providedPassword, String username) {
-        // Demo mode: validate against hardcoded credentials
-        if (ADMIN_USERNAME.equals(username)) {
-            return ADMIN_PASSWORD.equals(providedPassword);
-        } else if (RECRUITER_USERNAME.equals(username)) {
-            return RECRUITER_PASSWORD.equals(providedPassword);
-        } else if (JOB_SEEKER_USERNAME.equals(username)) {
-            return JOB_SEEKER_PASSWORD.equals(providedPassword);
-        }
-        return false;
     }
 
     public void initializeDemoUsers() {

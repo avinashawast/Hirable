@@ -14,9 +14,11 @@ import java.util.List;
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
     List<Job> findByRecruiterId(Long recruiterId);
-    List<Job> findByStatus(JobStatus status);
     
-    @Query("SELECT j FROM Job j WHERE j.status = 'APPROVED' " +
+    @Query(value = "SELECT * FROM jobs j WHERE j.status = CAST(:status AS job_status)", nativeQuery = true)
+    List<Job> findByStatus(@Param("status") String status);
+    
+    @Query("SELECT j FROM Job j WHERE j.status = com.hirable.entity.JobStatus.APPROVED " +
            "AND (LOWER(j.title) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
            "OR LOWER(j.description) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
            "AND (:location IS NULL OR j.location = :location) " +
