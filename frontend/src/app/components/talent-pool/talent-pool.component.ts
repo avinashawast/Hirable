@@ -15,6 +15,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { TalentPoolService, TalentPoolProfileDTO } from '../../services/talent-pool.service';
 import { FlagDialogComponent } from './flag-dialog/flag-dialog.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-talent-pool',
@@ -106,7 +107,7 @@ export class TalentPoolComponent implements OnInit {
   downloadResume(profile: TalentPoolProfileDTO): void {
     if (profile.resumeFilePath) {
       const link = document.createElement('a');
-      link.href = `http://localhost:8080/api/jobseekers/${profile.id}/resume/download`;
+      link.href = `${environment.apiUrl}/jobseekers/${profile.id}/resume/download`;
       link.download = `${profile.firstName}_${profile.lastName}_resume`;
       link.click();
     }

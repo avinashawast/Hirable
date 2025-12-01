@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface AnalyticsDTO {
   totalJobSeekers: number;
@@ -42,7 +43,7 @@ export interface ChatActivityDTO {
   providedIn: 'root'
 })
 export class AnalyticsService {
-  private apiUrl = 'http://localhost:8080/api/admin/analytics';
+  private apiUrl = `${environment.apiUrl}/admin/analytics`;
 
   constructor(private http: HttpClient) {}
 

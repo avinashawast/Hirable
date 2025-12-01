@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import SockJS from 'sockjs-client';
 import { Stomp, CompatClient } from '@stomp/stompjs';
+import { environment } from '../../environments/environment';
 
 export interface ChatDTO {
   id?: number;
@@ -35,7 +36,7 @@ export interface ChatMessageRequest {
   providedIn: 'root'
 })
 export class ChatService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = environment.apiUrl;
   private stompClient: CompatClient | null = null;
   private messageSubject = new Subject<MessageDTO>();
   public messages$ = this.messageSubject.asObservable();
@@ -45,7 +46,7 @@ export class ChatService {
   }
 
   private connect(): void {
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS(environment.wsUrl);
     this.stompClient = Stomp.over(socket);
     if (this.stompClient) {
       this.stompClient.connect({}, (frame: any) => {

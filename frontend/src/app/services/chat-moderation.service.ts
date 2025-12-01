@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface ChatDTO {
   id: number;
@@ -28,7 +29,7 @@ export interface MessageDTO {
   providedIn: 'root'
 })
 export class ChatModerationService {
-  private apiUrl = 'http://localhost:8080/api/admin';
+  private apiUrl = `${environment.apiUrl}/admin`;
 
   constructor(private http: HttpClient) {}
 
@@ -63,6 +64,6 @@ export class ChatModerationService {
   }
 
   getChatMessages(chatId: number): Observable<MessageDTO[]> {
-    return this.http.get<MessageDTO[]>(`http://localhost:8080/api/chats/${chatId}/messages`);
+    return this.http.get<MessageDTO[]>(`${environment.apiUrl}/chats/${chatId}/messages`);
   }
 }

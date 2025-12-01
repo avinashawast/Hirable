@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface ExperienceDTO {
   id?: number;
@@ -38,7 +39,7 @@ export interface JobSeekerProfileDTO {
   providedIn: 'root'
 })
 export class JobSeekerService {
-  private apiUrl = 'http://localhost:8080/api/jobseekers';
+  private apiUrl = `${environment.apiUrl}/jobseekers`;
 
   constructor(private http: HttpClient) {}
 

@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CandidateService, CandidateProfile } from '../../services/candidate.service';
 import { RecruiterService } from '../../services/recruiter.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -84,7 +85,7 @@ export class CandidateProfileComponent implements OnInit {
   downloadResume(): void {
     if (this.candidate && this.candidate.resumeFilePath) {
       const link = document.createElement('a');
-      link.href = `http://localhost:8080/api/jobseekers/${this.candidate.id}/resume/download`;
+      link.href = `${environment.apiUrl}/jobseekers/${this.candidate.id}/resume/download`;
       link.download = `${this.candidate.firstName}_${this.candidate.lastName}_resume`;
       link.click();
     }
